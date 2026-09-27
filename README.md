@@ -4,9 +4,12 @@ A small browser-based seek-and-find game presented as an illustrated book. Each 
 
 ## How it works
 
-- Eight scene artworks and 40 total targets are configured in `js/scene-config.js`.
+- Eight scene artworks, 77 discoverable details, and 41 curated challenge variations are configured in `js/scene-config.js`.
+- Each visit selects a challenge containing one to five objects and avoids recently used scenes, challenge types, and target sets.
 - Hotspots scale with each scene and support mouse, touch, keyboard, and screen-reader labels.
 - A subtle hint becomes available after 20 seconds without a find.
+- Hints and discovery feedback use environmental movement instead of answer rings.
+- Every meadow has its own rare signature ambient event.
 - Page completions are stored locally in the browser. There is no account or backend.
 - Sound is optional and synthesized in-browser, so there are no audio downloads.
 - Motion respects `prefers-reduced-motion` and the interface respects the system color scheme.
@@ -36,6 +39,7 @@ The included GitHub Actions workflow publishes the repository root whenever `mai
 - `js/scene-config.js`: scene content and hotspot coordinates
 - `js/scene-manager.js`: game state and page flow
 - `js/hints.js`: delayed hint behavior
+- `js/ambient-events.js`: environmental hints, found feedback, and scene-specific ambient events
 - `js/audio.js`: optional minimal sound
 - `js/storage.js`: local progress persistence
 - `assets/scenes/`: the eight independent scene artworks

@@ -27,28 +27,25 @@
 
       <section class="page" id="page" aria-live="polite">
         <div class="page__caption">
-          <p id="scene-title">The cottage garden</p>
-          <p id="instruction"><em>Find five things someone left behind.</em></p>
+          <p class="sr-only" id="scene-title">The cottage garden</p>
+          <p id="instruction"><em>Find the money.</em></p>
         </div>
 
         <div class="scene" id="scene" aria-label="Seek-and-find scene">
+          <img class="scene__next-image" id="scene-next-image" alt="" draggable="false" aria-hidden="true" />
           <img id="scene-image" alt="" draggable="false" />
-          <div class="ambient" aria-hidden="true">
-            <span class="drifter drifter--one"></span>
-            <span class="drifter drifter--two"></span>
-            <span class="light-wash"></span>
-          </div>
+          <div class="ambient" id="ambient" aria-hidden="true"></div>
           <div class="hotspots" id="hotspots"></div>
+          <span class="page-edge" aria-hidden="true"></span>
           <div class="scene__loading" id="scene-loading" role="status">Opening the next page...</div>
         </div>
 
         <footer class="page__footer">
-          <p class="progress" id="progress">0 / 5 found</p>
+          <p class="progress" id="progress">0 / 2</p>
           <div class="completion" id="completion" hidden>
             <span>Page complete.</span>
             <button class="turn-button" id="turn-button" type="button">Turn page <span aria-hidden="true">→</span></button>
           </div>
-          <p class="session" id="session-count">0 pages completed</p>
         </footer>
       </section>
     </main>

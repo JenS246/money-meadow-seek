@@ -1,4 +1,4 @@
-export function createHintController({ button, getRemaining }) {
+export function createHintController({ button, getRemaining, onHint }) {
   let timer;
   let lastHinted;
 
@@ -14,9 +14,7 @@ export function createHintController({ button, getRemaining }) {
     const choice = pool[Math.floor(Math.random() * pool.length)];
     if (!choice) return;
     lastHinted = choice;
-    choice.classList.remove("is-hinted");
-    void choice.offsetWidth;
-    choice.classList.add("is-hinted");
+    onHint(choice);
     button.hidden = true;
     timer = setTimeout(() => button.hidden = false, 20000);
   });
