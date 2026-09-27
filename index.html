@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#182015" />
+    <meta name="description" content="A quiet seek-and-find game in a strange, abundant meadow." />
+    <title>Money Meadow</title>
+    <link rel="preload" href="./assets/scenes/cottage-garden.png" as="image" fetchpriority="high" />
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <main class="book" aria-labelledby="game-title">
+      <header class="book__header">
+        <div>
+          <p class="kicker" id="page-number">Page 1</p>
+          <h1 id="game-title">Money Meadow</h1>
+        </div>
+        <div class="book__tools">
+          <button class="text-button" id="hint-button" type="button" hidden>Hint</button>
+          <button class="sound-button" id="sound-button" type="button" aria-pressed="false" aria-label="Turn sound on">
+            <span class="sound-button__mark" aria-hidden="true">♪</span>
+            <span id="sound-label">Sound off</span>
+          </button>
+        </div>
+      </header>
+
+      <section class="page" id="page" aria-live="polite">
+        <div class="page__caption">
+          <p id="scene-title">The cottage garden</p>
+          <p id="instruction"><em>Find five things someone left behind.</em></p>
+        </div>
+
+        <div class="scene" id="scene" aria-label="Seek-and-find scene">
+          <img id="scene-image" alt="" draggable="false" />
+          <div class="ambient" aria-hidden="true">
+            <span class="drifter drifter--one"></span>
+            <span class="drifter drifter--two"></span>
+            <span class="light-wash"></span>
+          </div>
+          <div class="hotspots" id="hotspots"></div>
+          <div class="scene__loading" id="scene-loading" role="status">Opening the next page...</div>
+        </div>
+
+        <footer class="page__footer">
+          <p class="progress" id="progress">0 / 5 found</p>
+          <div class="completion" id="completion" hidden>
+            <span>Page complete.</span>
+            <button class="turn-button" id="turn-button" type="button">Turn page <span aria-hidden="true">→</span></button>
+          </div>
+          <p class="session" id="session-count">0 pages completed</p>
+        </footer>
+      </section>
+    </main>
+
+    <div class="sr-only" id="announcer" aria-live="assertive"></div>
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>

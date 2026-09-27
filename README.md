@@ -1,0 +1,45 @@
+# Money Meadow Seek
+
+A small browser-based seek-and-find game presented as an illustrated book. Each page contains a distinct, richly detailed meadow and five integrated objects to discover.
+
+## How it works
+
+- Eight scene artworks and 40 total targets are configured in `js/scene-config.js`.
+- Hotspots scale with each scene and support mouse, touch, keyboard, and screen-reader labels.
+- A subtle hint becomes available after 20 seconds without a find.
+- Page completions are stored locally in the browser. There is no account or backend.
+- Sound is optional and synthesized in-browser, so there are no audio downloads.
+- Motion respects `prefers-reduced-motion` and the interface respects the system color scheme.
+
+## Run locally
+
+Serve the repository with any static server:
+
+```bash
+python3 -m http.server 4173
+```
+
+Then open `http://localhost:4173`.
+
+## Deploy
+
+The project uses relative paths and is ready for GitHub Pages at:
+
+`https://jens246.github.io/money-meadow-seek/`
+
+The included GitHub Actions workflow publishes the repository root whenever `main` is pushed. In the GitHub repository settings, set Pages source to **GitHub Actions** if it is not selected automatically.
+
+## Project structure
+
+- `index.html`: book and game shell
+- `css/styles.css`: responsive book layout, scene states, and motion
+- `js/scene-config.js`: scene content and hotspot coordinates
+- `js/scene-manager.js`: game state and page flow
+- `js/hints.js`: delayed hint behavior
+- `js/audio.js`: optional minimal sound
+- `js/storage.js`: local progress persistence
+- `assets/scenes/`: the eight independent scene artworks
+
+## Asset note
+
+The scene artworks were generated specifically for this project. The existing `money-meadow-animation` and `money-meadow-v2` repositories were not modified or referenced at runtime.
