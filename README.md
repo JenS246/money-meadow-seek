@@ -1,14 +1,16 @@
 # Money Meadow Seek
 
-A small browser-based seek-and-find game presented as an illustrated book. Each page contains a distinct, richly detailed meadow and five integrated objects to discover.
+A small browser-based seek-and-find game presented as an illustrated open book. Each page contains a distinct, richly detailed meadow with a changing observation challenge.
 
 ## How it works
 
-- Eight scene artworks, 77 discoverable details, and 41 curated challenge variations are configured in `js/scene-config.js`.
+- Eight scene artworks, 77 discoverable details, and 44 curated challenge variations are configured in `js/scene-config.js`.
 - Each visit selects a challenge containing one to five objects and avoids recently used scenes, challenge types, and target sets.
+- Every known object remains interactive: active targets receive hand-drawn discovery circles, known non-targets respond with a brief book note, and empty space gives only a subtle environmental disturbance.
 - Hotspots scale with each scene and support mouse, touch, keyboard, and screen-reader labels.
 - A subtle hint becomes available after 20 seconds without a find.
-- Hints and discovery feedback use environmental movement instead of answer rings.
+- Desktop uses a restrained two-page spread; smaller screens collapse to one continuous page.
+- Completed scenes reveal both an accessible text control and a physical corner lift, followed by a right-page turn across the gutter.
 - Every meadow has its own rare signature ambient event.
 - Page completions are stored locally in the browser. There is no account or backend.
 - Sound is optional and synthesized in-browser, so there are no audio downloads.

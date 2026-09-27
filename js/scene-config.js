@@ -96,7 +96,8 @@ export const scenes = [
       challenge("metal", "Find four things made of metal.", ["watch", "coin", "watering-can", "chair"]),
       challenge("lost", "Find five objects the plants have claimed.", ["star", "watch", "ribbon", "card", "coin"]),
       challenge("paper", "Find two things made of paper.", ["card", "books"]),
-      challenge("motion", "Find the thing that moved.", ["ribbon"])
+      challenge("motion", "Find the thing that moved.", ["ribbon"]),
+      challenge("not-touching", "Find the only thing not touching a plant.", ["bird"])
     ]
   },
   {
@@ -142,7 +143,8 @@ export const scenes = [
       challenge("metal", "Find three things made of metal.", ["coin", "scissors", "moon"]),
       challenge("lost", "Find four things someone left behind.", ["tag", "scissors", "moon", "shell"]),
       challenge("duplicate", "Two tiny lights match. Find both.", ["firefly-left", "firefly-right"]),
-      challenge("motion", "Find the petal that fell.", ["fallen-petal"])
+      challenge("motion", "Find the petal that fell.", ["fallen-petal"]),
+      challenge("other-page", "Which object belongs on another page?", ["shell"])
     ]
   },
   {
@@ -165,7 +167,8 @@ export const scenes = [
       challenge("metal", "Find two things made of metal.", ["spoon", "coin"]),
       challenge("pocket", "Find four things that fit in a pocket.", ["marble", "spoon", "coin", "feather"]),
       challenge("motion", "Find the thing that stirred.", ["feather"]),
-      challenge("red", "Find two red things near the foreground.", ["marble", "poppy-left"])
+      challenge("red", "Find two red things near the foreground.", ["marble", "poppy-left"]),
+      challenge("smallest-money", "Find the smallest piece of money.", ["coin"])
     ]
   },
   {

@@ -15,7 +15,12 @@ export class SceneManager {
     this.current = null;
     this.challenge = null;
     this.activeTargets = [];
+    this.activeTargetIds = new Set();
     this.found = new Set();
+    this.turning = false;
+    this.pageComplete = false;
+    this.completionTimer = null;
+    this.missCount = 0;
     this.history = {
       scenes: this.progress.lastSceneId ? [this.progress.lastSceneId] : [],
       types: [],
@@ -40,8 +45,12 @@ export class SceneManager {
   }
 
   async next() {
+    if (this.turning || !this.pageComplete || this.els.completion.hidden) return;
+    this.turning = true;
+    clearTimeout(this.completionTimer);
     this.hints.hide();
     this.ambient.stop();
+    this.els.cornerTurn.hidden = true;
     this.els.scene.classList.add("is-preparing-turn");
 
     const nextScene = this.pickScene();
@@ -52,7 +61,7 @@ export class SceneManager {
 
     playTurn();
     this.els.scene.classList.add("is-turning");
-    await wait(prefersReducedMotion.matches ? 180 : 760);
+    await wait(prefersReducedMotion.matches ? 120 : 860);
 
     this.pageNumber += 1;
     this.show(nextScene, nextChallenge, { preloaded: true });
@@ -61,6 +70,7 @@ export class SceneManager {
     await wait(prefersReducedMotion.matches ? 20 : 180);
     this.els.scene.classList.remove("is-settling");
     this.els.nextImage.removeAttribute("src");
+    this.turning = false;
   }
 
   preload(source) {
@@ -75,14 +85,24 @@ export class SceneManager {
   show(scene, selectedChallenge, { preloaded = false } = {}) {
     this.current = scene;
     this.challenge = selectedChallenge;
+    this.activeTargetIds = new Set(selectedChallenge.targetIds);
     this.activeTargets = selectedChallenge.targetIds.map((id) => scene.objects.find((item) => item.id === id));
     this.found.clear();
+    this.pageComplete = false;
+    clearTimeout(this.completionTimer);
 
     if (!preloaded) this.els.loading.classList.add("is-visible");
-    this.els.pageNumber.textContent = `Page ${this.pageNumber}`;
+    const leftPage = this.pageNumber * 2 - 1;
+    const rightPage = leftPage + 1;
+    this.els.leftPageNumber.textContent = leftPage;
+    this.els.rightPageNumber.textContent = rightPage;
+    this.els.leftPageNumber.setAttribute("aria-label", `Page ${leftPage}`);
+    this.els.rightPageNumber.setAttribute("aria-label", `Page ${rightPage}`);
     this.els.title.textContent = scene.title;
     this.els.instruction.innerHTML = `<em>${selectedChallenge.instruction}</em>`;
     this.els.completion.hidden = true;
+    this.els.cornerTurn.hidden = true;
+    this.els.scene.classList.remove("is-complete");
     this.els.announcer.textContent = "";
     this.els.image.alt = `${scene.title}. ${selectedChallenge.instruction}`;
     this.els.scene.style.setProperty("--mobile-position", scene.mobilePosition);
@@ -109,18 +129,24 @@ export class SceneManager {
 
   renderHotspots() {
     this.els.hotspots.replaceChildren();
-    this.activeTargets.forEach((item) => {
+    this.current.objects.forEach((item, index) => {
+      const isTarget = this.activeTargetIds.has(item.id);
       const button = document.createElement("button");
       button.type = "button";
       button.className = "hotspot";
       button.dataset.id = item.id;
       button.dataset.hint = item.hint;
-      button.setAttribute("aria-label", `Find ${item.label}`);
+      button.dataset.target = String(isTarget);
+      button.setAttribute("aria-label", isTarget ? `Find ${item.label}` : `Explore ${item.label}`);
       button.style.setProperty("--x", `${item.x}%`);
       button.style.setProperty("--y", `${item.y}%`);
       button.style.setProperty("--w", `${item.width}%`);
       button.style.setProperty("--h", `${item.height}%`);
-      button.addEventListener("click", () => this.find(item, button));
+      button.style.setProperty("--mark-rotate", `${((index % 5) - 2) * 1.5}deg`);
+      button.addEventListener("click", () => {
+        if (isTarget) this.find(item, button);
+        else this.notTarget(item, button);
+      });
       this.els.hotspots.append(button);
     });
   }
@@ -131,7 +157,7 @@ export class SceneManager {
   }
 
   find(item, button) {
-    if (this.found.has(item.id)) return;
+    if (this.turning || this.found.has(item.id)) return;
     this.found.add(item.id);
     button.classList.add("is-found");
     button.setAttribute("aria-label", `Found: ${item.label}`);
@@ -145,17 +171,49 @@ export class SceneManager {
   }
 
   updateProgress() {
-    this.els.progress.textContent = `${this.found.size} / ${this.activeTargets.length}`;
+    const marks = this.activeTargets.map((item) => {
+      const mark = document.createElement("span");
+      const isFound = this.found.has(item.id);
+      mark.className = `progress__mark${isFound ? " is-found" : ""}`;
+      mark.textContent = isFound ? "●" : "○";
+      mark.setAttribute("aria-hidden", "true");
+      return mark;
+    });
+    this.els.progressMarks.replaceChildren(...marks);
+    this.els.progressText.textContent = `${this.found.size} of ${this.activeTargets.length} found`;
+  }
+
+  notTarget(item, button) {
+    if (this.turning || this.pageComplete) return;
+    this.missCount += 1;
+    button.classList.remove("is-reacting");
+    void button.offsetWidth;
+    button.classList.add("is-reacting");
+    setTimeout(() => button.classList.remove("is-reacting"), 520);
+    this.ambient.miss(item);
+    const message = this.missCount % 3 === 0 ? "Not on this page." : "Not this one.";
+    this.ambient.note(item, message);
+    this.els.announcer.textContent = message;
+    this.hints.schedule();
+  }
+
+  emptySpace(x, y) {
+    if (this.turning || this.pageComplete) return;
+    this.ambient.empty(x, y);
   }
 
   complete() {
+    this.pageComplete = true;
     this.hints.hide();
-    playComplete();
     this.progress.pagesCompleted += 1;
     this.progress.lastSceneId = this.current.id;
     saveProgress(this.progress);
-    this.els.completion.hidden = false;
-    this.els.announcer.textContent = "Page complete. Turn the page when you are ready.";
-    this.els.turnButton.focus();
+    this.completionTimer = setTimeout(() => {
+      playComplete();
+      this.els.scene.classList.add("is-complete");
+      this.els.completion.hidden = false;
+      this.els.cornerTurn.hidden = false;
+      this.els.announcer.textContent = "Page complete. Turn the page when you are ready.";
+    }, prefersReducedMotion.matches ? 80 : 520);
   }
 }

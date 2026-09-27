@@ -10,43 +10,53 @@
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <main class="book" aria-labelledby="game-title">
-      <header class="book__header">
-        <div>
-          <p class="kicker" id="page-number">Page 1</p>
-          <h1 id="game-title">Money Meadow</h1>
-        </div>
-        <div class="book__tools">
-          <button class="text-button" id="hint-button" type="button" hidden>Hint</button>
-          <button class="sound-button" id="sound-button" type="button" aria-pressed="false" aria-label="Turn sound on">
-            <span class="sound-button__mark" aria-hidden="true">♪</span>
-            <span id="sound-label">Sound off</span>
-          </button>
-        </div>
-      </header>
+    <main class="book" id="page" aria-labelledby="game-title">
+      <section class="book-page book-page--left">
+        <div class="book-page__content">
+          <header class="book-heading">
+            <h1 id="game-title">Money Meadow</h1>
+            <p class="scene-title" id="scene-title">The cottage garden</p>
+          </header>
 
-      <section class="page" id="page" aria-live="polite">
-        <div class="page__caption">
-          <p class="sr-only" id="scene-title">The cottage garden</p>
-          <p id="instruction"><em>Find the money.</em></p>
-        </div>
+          <div class="challenge-block">
+            <p class="challenge" id="instruction"><em>Find the money.</em></p>
+            <div class="progress" id="progress" role="status" aria-live="polite">
+              <span class="progress__marks" id="progress-marks" aria-hidden="true"></span>
+              <span class="sr-only" id="progress-text">0 of 2 found</span>
+            </div>
+          </div>
 
-        <div class="scene" id="scene" aria-label="Seek-and-find scene">
-          <img class="scene__next-image" id="scene-next-image" alt="" draggable="false" aria-hidden="true" />
-          <img id="scene-image" alt="" draggable="false" />
-          <div class="ambient" id="ambient" aria-hidden="true"></div>
-          <div class="hotspots" id="hotspots"></div>
-          <span class="page-edge" aria-hidden="true"></span>
-          <div class="scene__loading" id="scene-loading" role="status">Opening the next page...</div>
-        </div>
+          <div class="book-actions">
+            <button class="text-button" id="hint-button" type="button" hidden>Hint</button>
+            <button class="sound-button" id="sound-button" type="button" aria-pressed="false" aria-label="Turn sound on">
+              <span class="sound-button__mark" aria-hidden="true">♪</span>
+              <span id="sound-label">Sound off</span>
+            </button>
+          </div>
 
-        <footer class="page__footer">
-          <p class="progress" id="progress">0 / 2</p>
           <div class="completion" id="completion" hidden>
-            <span>Page complete.</span>
+            <p>Page complete.</p>
             <button class="turn-button" id="turn-button" type="button">Turn page <span aria-hidden="true">→</span></button>
           </div>
-        </footer>
+        </div>
+        <p class="page-number page-number--left" id="left-page-number" aria-label="Left page 1">1</p>
+      </section>
+
+      <section class="book-page book-page--right" aria-label="Illustrated seek-and-find page">
+        <div class="scene" id="scene" aria-label="Seek-and-find scene">
+          <img class="scene__next-image" id="scene-next-image" alt="" draggable="false" aria-hidden="true" />
+          <div class="page-sheet" id="page-sheet">
+            <img id="scene-image" alt="" draggable="false" />
+            <span class="page-sheet__back" aria-hidden="true"></span>
+          </div>
+          <div class="ambient" id="ambient" aria-hidden="true"></div>
+          <div class="hotspots" id="hotspots"></div>
+          <button class="corner-turn" id="corner-turn" type="button" aria-label="Turn page" hidden>
+            <span aria-hidden="true"></span>
+          </button>
+          <div class="scene__loading" id="scene-loading" role="status">Opening the next page...</div>
+        </div>
+        <p class="page-number page-number--right" id="right-page-number" aria-label="Right page 2">2</p>
       </section>
     </main>
 
