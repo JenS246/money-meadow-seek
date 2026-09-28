@@ -11,18 +11,6 @@ function cue(container, type, x, y, purpose = "ambient") {
   setTimeout(() => element.remove(), 2600);
 }
 
-function note(container, x, y, message) {
-  container.querySelector(".book-note")?.remove();
-  const element = document.createElement("span");
-  element.className = "book-note";
-  element.textContent = message;
-  element.style.left = `${Math.min(82, Math.max(18, x))}%`;
-  element.style.top = `${Math.min(84, Math.max(14, y - 9))}%`;
-  container.append(element);
-  element.addEventListener("animationend", () => element.remove(), { once: true });
-  setTimeout(() => element.remove(), reducedMotion.matches ? 900 : 1900);
-}
-
 export function createAmbientController(container) {
   let timer;
   let currentScene;
@@ -58,9 +46,6 @@ export function createAmbientController(container) {
     },
     empty(x, y) {
       cue(container, "empty", x, y, "empty");
-    },
-    note(item, message) {
-      note(container, item.x, item.y, message);
     }
   };
 }

@@ -11,6 +11,7 @@ const challenge = (type, instruction, targetIds) => ({ type, instruction, target
 export const scenes = [
   {
     id: "cottage-garden", image: "./assets/scenes/cottage-garden.png", title: "The cottage garden",
+    layout: "full",
     mobilePosition: "48% 50%", ambient: { type: "butterfly", x: 62, y: 32 },
     objects: [
       target("key", "brass key", 13, 82, { size: 6, tags: ["metal", "lost-object", "pocket-sized"], difficulty: "easy", hint: "glint" }),
@@ -26,14 +27,15 @@ export const scenes = [
     ],
     challenges: [
       challenge("money", "Find the money.", ["bill", "coin"]),
-      challenge("pocket", "Find three things that fit in a pocket.", ["key", "marble", "coin"]),
-      challenge("duplicate", "Two birds are visiting. Find both.", ["robin", "birdbath-bird"]),
-      challenge("red", "One red thing is caught in a branch. Find it.", ["ribbon"]),
-      challenge("metal", "Find three things made of metal.", ["key", "coin", "watering-can"])
+      challenge("pocket", "Find 3 pocket-sized things.", ["key", "marble", "coin"]),
+      challenge("duplicate", "Find both birds.", ["robin", "birdbath-bird"]),
+      challenge("red", "Find the red ribbon.", ["ribbon"]),
+      challenge("metal", "Find 3 metal things.", ["key", "coin", "watering-can"])
     ]
   },
   {
     id: "rain-meadow", image: "./assets/scenes/rain-meadow.png", title: "After the rain",
+    layout: "captioned", caption: "After a passing shower.",
     mobilePosition: "52% 50%", ambient: { type: "raindrop", x: 82, y: 32 },
     objects: [
       target("stamp", "green postage stamp", 7, 17, { size: 7, tags: ["paper", "number", "lost-object", "pocket-sized"], difficulty: "easy", hint: "lift" }),
@@ -47,15 +49,16 @@ export const scenes = [
       target("daisy", "white daisy", 91, 47, { size: 7, tags: ["natural", "round"], difficulty: "easy", hint: "tremble" })
     ],
     challenges: [
-      challenge("round", "Find three things that are round.", ["ring", "button", "coin"]),
-      challenge("paper", "Find two things made of paper.", ["stamp", "boat"]),
-      challenge("metal", "Find two things made of metal.", ["ring", "coin"]),
-      challenge("motion", "Find the drop that moved.", ["dew-drop"]),
-      challenge("pocket", "Find four things that fit in a pocket.", ["stamp", "ring", "button", "coin"])
+      challenge("round", "Find 3 round things.", ["ring", "button", "coin"]),
+      challenge("paper", "Find 2 paper things.", ["stamp", "boat"]),
+      challenge("metal", "Find 2 metal things.", ["ring", "coin"]),
+      challenge("motion", "What moved?", ["dew-drop"]),
+      challenge("pocket", "Find 4 pocket-sized things.", ["stamp", "ring", "button", "coin"])
     ]
   },
   {
     id: "stone-wall", image: "./assets/scenes/stone-wall.png", title: "The old wall",
+    layout: "plate",
     mobilePosition: "54% 50%", ambient: { type: "insect", x: 58, y: 38 },
     objects: [
       target("coin", "old coin", 20, 8, { tags: ["money", "metal", "round", "number", "pocket-sized"], difficulty: "easy", hint: "glint" }),
@@ -69,15 +72,16 @@ export const scenes = [
       target("ivy", "ivy leaf", 54, 18, { size: 7, tags: ["natural", "green"], hint: "rustle" })
     ],
     challenges: [
-      challenge("money", "Find the money hidden in the wall.", ["coin", "bill"]),
-      challenge("metal", "Find two small things made of metal.", ["coin", "thimble"]),
-      challenge("number", "Find two things with numbers.", ["coin", "bill"]),
-      challenge("lost", "Find five things someone dropped.", ["coin", "bill", "thimble", "top", "feather"]),
-      challenge("motion", "Find the thing that stirred.", ["feather"])
+      challenge("money", "Find the money.", ["coin", "bill"]),
+      challenge("metal", "Find 2 small metal things.", ["coin", "thimble"]),
+      challenge("number", "Find 2 numbered things.", ["coin", "bill"]),
+      challenge("lost", "Find 5 lost things.", ["coin", "bill", "thimble", "top", "feather"]),
+      challenge("motion", "What moved?", ["feather"])
     ]
   },
   {
     id: "greenhouse", image: "./assets/scenes/greenhouse.png", title: "The glass house",
+    layout: "tall",
     mobilePosition: "48% 50%", ambient: { type: "condensation", x: 54, y: 20 },
     objects: [
       target("star", "porcelain star", 11, 9, { tags: ["lost-object", "pocket-sized"], difficulty: "easy", hint: "shine" }),
@@ -92,16 +96,17 @@ export const scenes = [
       target("chair", "iron chair", 68, 42, { size: 8, tags: ["metal", "garden"], hint: "glint" })
     ],
     challenges: [
-      challenge("number", "Find three things with numbers.", ["watch", "card", "coin"]),
-      challenge("metal", "Find four things made of metal.", ["watch", "coin", "watering-can", "chair"]),
-      challenge("lost", "Find five objects the plants have claimed.", ["star", "watch", "ribbon", "card", "coin"]),
-      challenge("paper", "Find two things made of paper.", ["card", "books"]),
-      challenge("motion", "Find the thing that moved.", ["ribbon"]),
-      challenge("not-touching", "Find the only thing not touching a plant.", ["bird"])
+      challenge("number", "Find 3 numbered things.", ["watch", "card", "coin"]),
+      challenge("metal", "Find 4 metal things.", ["watch", "coin", "watering-can", "chair"]),
+      challenge("lost", "Find 5 misplaced things.", ["star", "watch", "ribbon", "card", "coin"]),
+      challenge("paper", "Find 2 paper things.", ["card", "books"]),
+      challenge("motion", "What moved?", ["ribbon"]),
+      challenge("not-touching", "What isn't touching a plant?", ["bird"])
     ]
   },
   {
     id: "woodland-edge", image: "./assets/scenes/woodland-edge.png", title: "Where the woods begin",
+    layout: "full",
     mobilePosition: "49% 50%", ambient: { type: "fern", x: 51, y: 62 },
     objects: [
       target("compass", "brass compass", 12, 72, { size: 7, tags: ["metal", "round", "lost-object", "pocket-sized"], difficulty: "easy", hint: "glint" }),
@@ -115,15 +120,16 @@ export const scenes = [
       target("white-flower", "white woodland flower", 86, 78, { size: 7, tags: ["natural", "white"], hint: "tremble" })
     ],
     challenges: [
-      challenge("money", "Find the money among the ferns.", ["coin", "bill"]),
-      challenge("round", "Find three things that are round.", ["compass", "coin", "bead"]),
-      challenge("pocket", "Find four things that fit in a pocket.", ["compass", "coin", "mitten", "bead"]),
-      challenge("lost", "Find five things left in the woods.", ["compass", "coin", "mitten", "bill", "bead"]),
-      challenge("motion", "Find the thing that fluttered.", ["butterfly"])
+      challenge("money", "Find the money.", ["coin", "bill"]),
+      challenge("round", "Find 3 round things.", ["compass", "coin", "bead"]),
+      challenge("pocket", "Find 4 pocket-sized things.", ["compass", "coin", "mitten", "bead"]),
+      challenge("lost", "Find 5 lost things.", ["compass", "coin", "mitten", "bill", "bead"]),
+      challenge("motion", "What moved?", ["butterfly"])
     ]
   },
   {
     id: "rose-path", image: "./assets/scenes/rose-path.png", title: "The rose path",
+    layout: "captioned", caption: "The path at dusk.",
     mobilePosition: "52% 50%", ambient: { type: "petal", x: 45, y: 26 },
     objects: [
       target("coin", "copper coin", 12, 11, { tags: ["money", "metal", "round", "number", "pocket-sized"], difficulty: "easy", hint: "glint" }),
@@ -139,16 +145,17 @@ export const scenes = [
       target("fallen-petal", "fallen rose petal", 62, 87, { size: 6, tags: ["natural", "pink", "moved"], difficulty: "hard", hint: "flutter" })
     ],
     challenges: [
-      challenge("number", "Find two things with numbers.", ["coin", "tag"]),
-      challenge("metal", "Find three things made of metal.", ["coin", "scissors", "moon"]),
-      challenge("lost", "Find four things someone left behind.", ["tag", "scissors", "moon", "shell"]),
-      challenge("duplicate", "Two tiny lights match. Find both.", ["firefly-left", "firefly-right"]),
-      challenge("motion", "Find the petal that fell.", ["fallen-petal"]),
-      challenge("other-page", "Which object belongs on another page?", ["shell"])
+      challenge("number", "Find 2 numbered things.", ["coin", "tag"]),
+      challenge("metal", "Find 3 metal things.", ["coin", "scissors", "moon"]),
+      challenge("lost", "Find 4 lost things.", ["tag", "scissors", "moon", "shell"]),
+      challenge("duplicate", "Find both matching lights.", ["firefly-left", "firefly-right"]),
+      challenge("motion", "What moved?", ["fallen-petal"]),
+      challenge("other-page", "What doesn't belong?", ["shell"])
     ]
   },
   {
     id: "summer-field", image: "./assets/scenes/summer-field.png", title: "Late summer",
+    layout: "tall",
     mobilePosition: "52% 50%", ambient: { type: "seed", x: 68, y: 38 },
     objects: [
       target("bill", "folded banknote", 12, 18, { size: 8, tags: ["money", "paper", "number", "lost-object"], difficulty: "easy", hint: "lift" }),
@@ -162,17 +169,18 @@ export const scenes = [
       target("daisy", "white daisy", 50, 66, { size: 7, tags: ["natural", "round"], hint: "tremble" })
     ],
     challenges: [
-      challenge("money", "Find the money in the tall grass.", ["bill", "coin"]),
-      challenge("round", "Find three things that are round.", ["marble", "coin", "apple"]),
-      challenge("metal", "Find two things made of metal.", ["spoon", "coin"]),
-      challenge("pocket", "Find four things that fit in a pocket.", ["marble", "spoon", "coin", "feather"]),
-      challenge("motion", "Find the thing that stirred.", ["feather"]),
-      challenge("red", "Find two red things near the foreground.", ["marble", "poppy-left"]),
-      challenge("smallest-money", "Find the smallest piece of money.", ["coin"])
+      challenge("money", "Find the money.", ["bill", "coin"]),
+      challenge("round", "Find 3 round things.", ["marble", "coin", "apple"]),
+      challenge("metal", "Find 2 metal things.", ["spoon", "coin"]),
+      challenge("pocket", "Find 4 pocket-sized things.", ["marble", "spoon", "coin", "feather"]),
+      challenge("motion", "What moved?", ["feather"]),
+      challenge("red", "Find 2 red things.", ["marble", "poppy-left"]),
+      challenge("smallest-money", "Find the smallest coin.", ["coin"])
     ]
   },
   {
     id: "secret-garden", image: "./assets/scenes/secret-garden.png", title: "The impossible garden",
+    layout: "plate",
     mobilePosition: "51% 50%", ambient: { type: "impossible", x: 53, y: 41 },
     objects: [
       target("moon", "moon pendant", 13, 80, { tags: ["metal", "round", "impossible", "pocket-sized"], hint: "glint" }),
@@ -187,11 +195,11 @@ export const scenes = [
       target("daisy", "small white daisy", 85, 73, { size: 6, tags: ["natural", "white", "round"], difficulty: "hard", hint: "tremble" })
     ],
     challenges: [
-      challenge("impossible", "Find three impossible things.", ["door", "coin", "eye"]),
-      challenge("odd-one", "One thing is looking back. Find it.", ["eye"]),
-      challenge("money", "Find the money growing in the garden.", ["coin", "bill"]),
-      challenge("round", "Find four things that are round.", ["moon", "coin", "eye", "door-ring"]),
-      challenge("motion", "Find the strange thing that moved.", ["eye"])
+      challenge("impossible", "Find 3 impossible things.", ["door", "coin", "eye"]),
+      challenge("odd-one", "What is looking back?", ["eye"]),
+      challenge("money", "Find the money.", ["coin", "bill"]),
+      challenge("round", "Find 4 round things.", ["moon", "coin", "eye", "door-ring"]),
+      challenge("motion", "What moved?", ["eye"])
     ]
   }
 ];

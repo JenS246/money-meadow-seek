@@ -15,11 +15,14 @@
         <div class="book-page__content">
           <header class="book-heading">
             <h1 id="game-title">Money Meadow</h1>
-            <p class="scene-title" id="scene-title">The cottage garden</p>
+            <p class="scene-line">
+              <span class="scene-number" id="scene-number">01</span>
+              <span class="scene-title" id="scene-title">The cottage garden</span>
+            </p>
           </header>
 
           <div class="challenge-block">
-            <p class="challenge" id="instruction"><em>Find the money.</em></p>
+            <p class="challenge" id="instruction">Find the money.</p>
             <div class="progress" id="progress" role="status" aria-live="polite">
               <span class="progress__marks" id="progress-marks" aria-hidden="true"></span>
               <span class="sr-only" id="progress-text">0 of 2 found</span>
@@ -42,13 +45,17 @@
         <p class="page-number page-number--left" id="left-page-number" aria-label="Left page 1">1</p>
       </section>
 
-      <section class="book-page book-page--right" aria-label="Illustrated seek-and-find page">
+      <section class="book-page book-page--right" id="illustration-page" data-layout="plate" aria-label="Illustrated seek-and-find page">
         <div class="scene" id="scene" aria-label="Seek-and-find scene">
           <img class="scene__next-image" id="scene-next-image" alt="" draggable="false" aria-hidden="true" />
           <div class="page-sheet" id="page-sheet">
             <img id="scene-image" alt="" draggable="false" />
             <span class="page-sheet__back" aria-hidden="true"></span>
           </div>
+          <span class="page-turn-shadow" aria-hidden="true"></span>
+          <span class="page-fold" aria-hidden="true">
+            <img class="page-fold__ghost" id="page-fold-image" alt="" draggable="false" />
+          </span>
           <div class="ambient" id="ambient" aria-hidden="true"></div>
           <div class="hotspots" id="hotspots"></div>
           <button class="corner-turn" id="corner-turn" type="button" aria-label="Turn page" hidden>
@@ -56,6 +63,7 @@
           </button>
           <div class="scene__loading" id="scene-loading" role="status">Opening the next page...</div>
         </div>
+        <p class="scene-caption" id="scene-caption" hidden></p>
         <p class="page-number page-number--right" id="right-page-number" aria-label="Right page 2">2</p>
       </section>
     </main>

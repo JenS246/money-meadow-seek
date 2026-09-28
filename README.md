@@ -6,15 +6,15 @@ A small browser-based seek-and-find game presented as an illustrated open book. 
 
 - Eight scene artworks, 77 discoverable details, and 44 curated challenge variations are configured in `js/scene-config.js`.
 - Each visit selects a challenge containing one to five objects and avoids recently used scenes, challenge types, and target sets.
-- Every known object remains interactive: active targets receive hand-drawn discovery circles, known non-targets respond with a brief book note, and empty space gives only a subtle environmental disturbance.
+- Every known object remains interactive: active targets receive varied hand-drawn discovery circles, known non-targets respond silently with an object-specific movement, and empty space gives only a subtle environmental disturbance.
 - Hotspots scale with each scene and support mouse, touch, keyboard, and screen-reader labels.
 - A subtle hint becomes available after 20 seconds without a find.
-- Desktop uses a restrained two-page spread; smaller screens collapse to one continuous page.
-- Completed scenes reveal both an accessible text control and a physical corner lift, followed by a right-page turn across the gutter.
+- Desktop uses a restrained two-page spread with layered page edges, a curved gutter, and four intentional illustration-margin treatments; smaller screens collapse to one continuous page.
+- Completed scenes reveal both an accessible text control and a physical corner lift. The old sheet folds from the lower-right edge while a moving shadow uncovers the preloaded next meadow.
 - Every meadow has its own rare signature ambient event.
 - Page completions are stored locally in the browser. There is no account or backend.
 - Sound is optional and synthesized in-browser, so there are no audio downloads.
-- Motion respects `prefers-reduced-motion` and the interface respects the system color scheme.
+- Motion respects `prefers-reduced-motion`. The warm light palette is intentionally fixed to preserve the printed-paper illusion.
 
 ## Run locally
 

@@ -4,6 +4,7 @@ import { playComplete, playFound, playTurn } from "./audio.js";
 
 const wait = (duration) => new Promise((resolve) => setTimeout(resolve, duration));
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const narrowScreen = window.matchMedia("(max-width: 859px)");
 
 export class SceneManager {
   constructor(elements, hintController, ambientController) {
@@ -20,7 +21,6 @@ export class SceneManager {
     this.turning = false;
     this.pageComplete = false;
     this.completionTimer = null;
-    this.missCount = 0;
     this.history = {
       scenes: this.progress.lastSceneId ? [this.progress.lastSceneId] : [],
       types: [],
@@ -61,7 +61,7 @@ export class SceneManager {
 
     playTurn();
     this.els.scene.classList.add("is-turning");
-    await wait(prefersReducedMotion.matches ? 120 : 860);
+    await wait(prefersReducedMotion.matches ? 120 : narrowScreen.matches ? 540 : 980);
 
     this.pageNumber += 1;
     this.show(nextScene, nextChallenge, { preloaded: true });
@@ -98,8 +98,12 @@ export class SceneManager {
     this.els.rightPageNumber.textContent = rightPage;
     this.els.leftPageNumber.setAttribute("aria-label", `Page ${leftPage}`);
     this.els.rightPageNumber.setAttribute("aria-label", `Page ${rightPage}`);
+    this.els.sceneNumber.textContent = String(leftPage).padStart(2, "0");
     this.els.title.textContent = scene.title;
-    this.els.instruction.innerHTML = `<em>${selectedChallenge.instruction}</em>`;
+    this.els.instruction.textContent = selectedChallenge.instruction;
+    this.els.illustrationPage.dataset.layout = scene.layout || "plate";
+    this.els.caption.textContent = scene.caption || "";
+    this.els.caption.hidden = !scene.caption;
     this.els.completion.hidden = true;
     this.els.cornerTurn.hidden = true;
     this.els.scene.classList.remove("is-complete");
@@ -108,6 +112,7 @@ export class SceneManager {
     this.els.scene.style.setProperty("--mobile-position", scene.mobilePosition);
     this.els.image.onload = () => this.els.loading.classList.remove("is-visible");
     this.els.image.src = scene.image;
+    this.els.foldImage.src = scene.image;
     if (preloaded || this.els.image.complete) this.els.loading.classList.remove("is-visible");
 
     this.recordSelection(scene, selectedChallenge);
@@ -143,6 +148,8 @@ export class SceneManager {
       button.style.setProperty("--w", `${item.width}%`);
       button.style.setProperty("--h", `${item.height}%`);
       button.style.setProperty("--mark-rotate", `${((index % 5) - 2) * 1.5}deg`);
+      button.style.setProperty("--mark-stroke", `${1.05 + (index % 3) * 0.22}px`);
+      button.style.setProperty("--mark-x", `${2 + (index % 3) * 2}%`);
       button.addEventListener("click", () => {
         if (isTarget) this.find(item, button);
         else this.notTarget(item, button);
@@ -185,15 +192,11 @@ export class SceneManager {
 
   notTarget(item, button) {
     if (this.turning || this.pageComplete) return;
-    this.missCount += 1;
     button.classList.remove("is-reacting");
     void button.offsetWidth;
     button.classList.add("is-reacting");
     setTimeout(() => button.classList.remove("is-reacting"), 520);
     this.ambient.miss(item);
-    const message = this.missCount % 3 === 0 ? "Not on this page." : "Not this one.";
-    this.ambient.note(item, message);
-    this.els.announcer.textContent = message;
     this.hints.schedule();
   }
 
@@ -214,6 +217,6 @@ export class SceneManager {
       this.els.completion.hidden = false;
       this.els.cornerTurn.hidden = false;
       this.els.announcer.textContent = "Page complete. Turn the page when you are ready.";
-    }, prefersReducedMotion.matches ? 80 : 520);
+    }, prefersReducedMotion.matches ? 80 : 440);
   }
 }
