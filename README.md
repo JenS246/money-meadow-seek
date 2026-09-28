@@ -10,8 +10,8 @@ A small browser-based seek-and-find game presented as a tactile illustrated book
 - Every known object remains interactive: active targets receive persistent hand-drawn circles and pencil checks, while known non-targets wobble and receive a clear lingering graphite X without advancing progress. Empty space gives only a subtle environmental disturbance.
 - Hotspots scale with each scene and support mouse, touch, keyboard, and screen-reader labels.
 - Help arrives gradually without a clock or penalty: a subtle environmental hint appears first, then leaves a quiet persistent cue near the object, followed later by an optional one-object reveal and a skip-page control.
-- Hand-arranged watercolor clusters surround the cover with intentionally uneven density. Ruled field-book pages vary pressed flowers, petals, pencil marks, and faint currency imprints from spread to spread.
-- Gameplay pages vary pressed botanicals, faint currency marks, stamps, pressure marks, and margin flourishes so the paper feels handled without obscuring the puzzle text.
+- Five hand-arranged cover compositions gather the watercolor pieces into overlapping floral masses with large areas left open.
+- Ruled field-book pages use one main tactile detail at a time, varying pressed flowers, petals, pencil marks, and faint currency rubbings without obscuring the puzzle text.
 - An optional physical magnifying glass follows the pointer on desktop, supports keyboard positioning, and appears with a press-and-hold gesture on touch screens. It magnifies the artwork, ambient cues, and persistent found marks together.
 - Desktop uses a restrained two-page spread with layered page edges, a curved gutter, and four intentional illustration-margin treatments; smaller screens collapse to one continuous page.
 - Completed scenes reveal both an accessible text control and a physical corner lift. The old sheet folds from the lower-right edge while a moving shadow uncovers the preloaded next meadow.

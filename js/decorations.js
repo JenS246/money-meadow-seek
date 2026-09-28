@@ -1,92 +1,91 @@
 const variants = ["daisy", "rose", "violet", "fern", "petal", "leaves"];
 
-const coverLayouts = [
+const coverCompositions = [
   [
-    { variant: "fern", x: -2, y: 7, size: 148, rotation: -29 },
-    { variant: "rose", x: 7, y: 12, size: 88, rotation: 18 },
-    { variant: "petal", x: 15, y: 5, size: 48, rotation: -16 },
-    { variant: "daisy", x: 5, y: 27, size: 67, rotation: 24 },
-    { variant: "leaves", x: -1, y: 40, size: 104, rotation: -22 },
-    { variant: "violet", x: 9, y: 49, size: 54, rotation: 15 },
-    { variant: "petal", x: 3, y: 61, size: 43, rotation: 35 },
-    { variant: "rose", x: 10, y: 76, size: 96, rotation: -14 },
-    { variant: "fern", x: 2, y: 89, size: 128, rotation: 24 },
-    { variant: "daisy", x: 20, y: 94, size: 72, rotation: -20 },
-    { variant: "petal", x: 30, y: 101, size: 45, rotation: 31 },
-    { variant: "leaves", x: 42, y: 99, size: 67, rotation: -18 },
-    { variant: "violet", x: 62, y: 101, size: 49, rotation: 16 },
-    { variant: "petal", x: 83, y: 96, size: 41, rotation: -34 },
-    { variant: "rose", x: 98, y: 78, size: 76, rotation: 27 },
-    { variant: "leaves", x: 101, y: 58, size: 112, rotation: -30 },
-    { variant: "daisy", x: 95, y: 30, size: 57, rotation: 12 },
-    { variant: "petal", x: 102, y: 18, size: 38, rotation: -15 },
-    { variant: "violet", x: 83, y: 3, size: 52, rotation: 22 },
-    { variant: "petal", x: 3, y: 20, size: 46, rotation: 14 },
-    { variant: "violet", x: 14, y: 33, size: 62, rotation: -26 },
-    { variant: "daisy", x: 4, y: 68, size: 74, rotation: 31 },
-    { variant: "leaves", x: 18, y: 85, size: 86, rotation: -17 },
-    { variant: "rose", x: 28, y: 7, size: 78, rotation: 26 },
-    { variant: "petal", x: 53, y: 96, size: 51, rotation: -24 },
-    { variant: "violet", x: 92, y: 67, size: 59, rotation: 19 },
-    { variant: "fern", x: 88, y: 88, size: 108, rotation: -29 }
+    { variant: "fern", x: -2, y: 91, size: 206, rotation: 28, layer: 1 },
+    { variant: "leaves", x: 8, y: 88, size: 164, rotation: -24, layer: 2 },
+    { variant: "rose", x: 13, y: 82, size: 142, rotation: 13, layer: 4 },
+    { variant: "daisy", x: 4, y: 75, size: 108, rotation: -18, layer: 3 },
+    { variant: "violet", x: 21, y: 91, size: 92, rotation: 24, layer: 5 },
+    { variant: "rose", x: 27, y: 96, size: 104, rotation: -17, layer: 3 },
+    { variant: "leaves", x: 19, y: 78, size: 118, rotation: 34, layer: 2 },
+    { variant: "petal", x: 7, y: 68, size: 58, rotation: 12, layer: 6 },
+    { variant: "petal", x: 26, y: 73, size: 46, rotation: -31, layer: 6 },
+    { variant: "daisy", x: 31, y: 88, size: 78, rotation: 18, layer: 4 },
+    { variant: "leaves", x: 36, y: 96, size: 122, rotation: -18, layer: 1 },
+    { variant: "violet", x: 91, y: 13, size: 84, rotation: -16, layer: 3 },
+    { variant: "leaves", x: 98, y: 8, size: 126, rotation: 31, layer: 1 },
+    { variant: "daisy", x: 95, y: 23, size: 76, rotation: 17, layer: 4 },
+    { variant: "petal", x: 47, y: 12, size: 52, rotation: -24, layer: 2 },
+    { variant: "petal", x: 55, y: 17, size: 39, rotation: 28, layer: 2 }
   ],
   [
-    { variant: "petal", x: 2, y: 15, size: 42, rotation: 28 },
-    { variant: "violet", x: -1, y: 37, size: 61, rotation: -17 },
-    { variant: "leaves", x: 5, y: 71, size: 87, rotation: 21 },
-    { variant: "daisy", x: 16, y: 92, size: 59, rotation: -19 },
-    { variant: "petal", x: 31, y: 100, size: 38, rotation: 30 },
-    { variant: "fern", x: 55, y: 101, size: 106, rotation: -12 },
-    { variant: "rose", x: 73, y: 96, size: 82, rotation: 18 },
-    { variant: "violet", x: 88, y: 91, size: 55, rotation: -25 },
-    { variant: "leaves", x: 99, y: 84, size: 104, rotation: 30 },
-    { variant: "petal", x: 94, y: 72, size: 47, rotation: -11 },
-    { variant: "rose", x: 102, y: 61, size: 91, rotation: -24 },
-    { variant: "daisy", x: 95, y: 49, size: 65, rotation: 17 },
-    { variant: "fern", x: 102, y: 35, size: 142, rotation: -34 },
-    { variant: "petal", x: 91, y: 28, size: 41, rotation: 24 },
-    { variant: "violet", x: 99, y: 17, size: 58, rotation: -16 },
-    { variant: "rose", x: 90, y: 8, size: 92, rotation: 20 },
-    { variant: "leaves", x: 76, y: 1, size: 80, rotation: -25 },
-    { variant: "daisy", x: 63, y: 4, size: 52, rotation: 14 },
-    { variant: "petal", x: 46, y: -1, size: 40, rotation: -32 },
-    { variant: "daisy", x: 96, y: 23, size: 71, rotation: 27 },
-    { variant: "petal", x: 88, y: 39, size: 45, rotation: -20 },
-    { variant: "violet", x: 102, y: 53, size: 66, rotation: 15 },
-    { variant: "rose", x: 91, y: 67, size: 84, rotation: -25 },
-    { variant: "fern", x: 89, y: 80, size: 118, rotation: 21 },
-    { variant: "daisy", x: 80, y: 90, size: 63, rotation: -17 },
-    { variant: "leaves", x: 33, y: 96, size: 79, rotation: 25 },
-    { variant: "petal", x: 7, y: 82, size: 48, rotation: -29 }
+    { variant: "fern", x: -3, y: 8, size: 192, rotation: -25, layer: 1 },
+    { variant: "leaves", x: 8, y: 12, size: 152, rotation: 26, layer: 2 },
+    { variant: "rose", x: 15, y: 10, size: 138, rotation: -12, layer: 4 },
+    { variant: "daisy", x: 4, y: 22, size: 98, rotation: 21, layer: 5 },
+    { variant: "violet", x: 23, y: 20, size: 90, rotation: -28, layer: 5 },
+    { variant: "leaves", x: 18, y: 4, size: 116, rotation: 34, layer: 2 },
+    { variant: "petal", x: 30, y: 9, size: 51, rotation: 18, layer: 6 },
+    { variant: "petal", x: 10, y: 31, size: 43, rotation: -22, layer: 6 },
+    { variant: "fern", x: 98, y: 96, size: 184, rotation: -28, layer: 1 },
+    { variant: "leaves", x: 87, y: 92, size: 146, rotation: 23, layer: 2 },
+    { variant: "rose", x: 91, y: 83, size: 132, rotation: -15, layer: 4 },
+    { variant: "daisy", x: 78, y: 91, size: 94, rotation: 19, layer: 5 },
+    { variant: "violet", x: 99, y: 76, size: 86, rotation: -24, layer: 5 },
+    { variant: "petal", x: 82, y: 79, size: 49, rotation: 28, layer: 6 },
+    { variant: "leaves", x: 72, y: 97, size: 112, rotation: -19, layer: 1 },
+    { variant: "petal", x: 61, y: 13, size: 50, rotation: -31, layer: 2 }
   ],
   [
-    { variant: "rose", x: 1, y: 10, size: 73, rotation: -22 },
-    { variant: "leaves", x: 11, y: 3, size: 93, rotation: 27 },
-    { variant: "petal", x: 26, y: 1, size: 43, rotation: -18 },
-    { variant: "violet", x: 47, y: -1, size: 48, rotation: 31 },
-    { variant: "daisy", x: 73, y: 3, size: 57, rotation: -14 },
-    { variant: "petal", x: 96, y: 16, size: 39, rotation: 22 },
-    { variant: "fern", x: 101, y: 39, size: 126, rotation: -26 },
-    { variant: "rose", x: 96, y: 59, size: 83, rotation: 19 },
-    { variant: "petal", x: 102, y: 75, size: 44, rotation: -31 },
-    { variant: "violet", x: 92, y: 90, size: 61, rotation: 16 },
-    { variant: "leaves", x: 79, y: 98, size: 96, rotation: -21 },
-    { variant: "daisy", x: 64, y: 94, size: 69, rotation: 18 },
-    { variant: "petal", x: 55, y: 103, size: 39, rotation: -27 },
-    { variant: "rose", x: 43, y: 98, size: 84, rotation: 14 },
-    { variant: "fern", x: 29, y: 102, size: 118, rotation: -18 },
-    { variant: "violet", x: 17, y: 94, size: 57, rotation: 29 },
-    { variant: "petal", x: 7, y: 84, size: 45, rotation: -13 },
-    { variant: "daisy", x: -1, y: 72, size: 66, rotation: 20 },
-    { variant: "leaves", x: 5, y: 57, size: 88, rotation: -28 },
-    { variant: "violet", x: 16, y: 4, size: 61, rotation: -23 },
-    { variant: "petal", x: 88, y: 7, size: 45, rotation: 28 },
-    { variant: "daisy", x: 97, y: 30, size: 68, rotation: -18 },
-    { variant: "rose", x: 90, y: 76, size: 88, rotation: 21 },
-    { variant: "petal", x: 72, y: 91, size: 43, rotation: -26 },
-    { variant: "violet", x: 52, y: 94, size: 62, rotation: 17 },
-    { variant: "daisy", x: 32, y: 93, size: 72, rotation: -21 },
-    { variant: "rose", x: 8, y: 69, size: 82, rotation: 26 }
+    { variant: "fern", x: 22, y: 100, size: 176, rotation: -20, layer: 1 },
+    { variant: "leaves", x: 34, y: 96, size: 142, rotation: 27, layer: 2 },
+    { variant: "rose", x: 43, y: 93, size: 126, rotation: -13, layer: 4 },
+    { variant: "daisy", x: 53, y: 97, size: 102, rotation: 19, layer: 5 },
+    { variant: "violet", x: 63, y: 93, size: 94, rotation: -25, layer: 5 },
+    { variant: "leaves", x: 72, y: 99, size: 136, rotation: 20, layer: 2 },
+    { variant: "rose", x: 79, y: 92, size: 118, rotation: -18, layer: 4 },
+    { variant: "petal", x: 29, y: 87, size: 51, rotation: 28, layer: 6 },
+    { variant: "petal", x: 68, y: 84, size: 45, rotation: -30, layer: 6 },
+    { variant: "daisy", x: 87, y: 98, size: 82, rotation: 17, layer: 5 },
+    { variant: "fern", x: 101, y: 56, size: 214, rotation: -17, layer: 1 },
+    { variant: "leaves", x: 96, y: 49, size: 148, rotation: 24, layer: 2 },
+    { variant: "rose", x: 98, y: 66, size: 112, rotation: -16, layer: 4 },
+    { variant: "petal", x: 15, y: 15, size: 54, rotation: 24, layer: 3 },
+    { variant: "petal", x: 26, y: 9, size: 41, rotation: -27, layer: 3 }
+  ],
+  [
+    { variant: "fern", x: 101, y: 87, size: 205, rotation: -28, layer: 1 },
+    { variant: "leaves", x: 94, y: 80, size: 156, rotation: 24, layer: 2 },
+    { variant: "rose", x: 96, y: 70, size: 142, rotation: -14, layer: 4 },
+    { variant: "daisy", x: 87, y: 87, size: 101, rotation: 20, layer: 5 },
+    { variant: "violet", x: 101, y: 58, size: 92, rotation: -26, layer: 5 },
+    { variant: "leaves", x: 84, y: 76, size: 128, rotation: 31, layer: 2 },
+    { variant: "petal", x: 89, y: 64, size: 52, rotation: 17, layer: 6 },
+    { variant: "petal", x: 80, y: 91, size: 44, rotation: -29, layer: 6 },
+    { variant: "fern", x: -2, y: 97, size: 168, rotation: 24, layer: 1 },
+    { variant: "rose", x: 9, y: 91, size: 118, rotation: -18, layer: 4 },
+    { variant: "leaves", x: 17, y: 96, size: 124, rotation: 27, layer: 2 },
+    { variant: "violet", x: 19, y: 86, size: 82, rotation: -21, layer: 5 },
+    { variant: "petal", x: 54, y: 8, size: 53, rotation: 26, layer: 3 },
+    { variant: "petal", x: 61, y: 14, size: 39, rotation: -24, layer: 3 }
+  ],
+  [
+    { variant: "fern", x: 101, y: 8, size: 198, rotation: 24, layer: 1 },
+    { variant: "leaves", x: 92, y: 11, size: 158, rotation: -27, layer: 2 },
+    { variant: "rose", x: 88, y: 14, size: 139, rotation: 15, layer: 4 },
+    { variant: "daisy", x: 99, y: 23, size: 104, rotation: -18, layer: 5 },
+    { variant: "violet", x: 80, y: 7, size: 92, rotation: 25, layer: 5 },
+    { variant: "leaves", x: 84, y: 24, size: 126, rotation: -31, layer: 2 },
+    { variant: "petal", x: 76, y: 19, size: 49, rotation: 21, layer: 6 },
+    { variant: "petal", x: 96, y: 34, size: 43, rotation: -28, layer: 6 },
+    { variant: "fern", x: -4, y: 48, size: 206, rotation: -19, layer: 1 },
+    { variant: "leaves", x: 5, y: 52, size: 146, rotation: 27, layer: 2 },
+    { variant: "rose", x: 12, y: 55, size: 121, rotation: -16, layer: 4 },
+    { variant: "violet", x: 16, y: 45, size: 84, rotation: 22, layer: 5 },
+    { variant: "daisy", x: 39, y: 98, size: 97, rotation: -17, layer: 4 },
+    { variant: "leaves", x: 48, y: 101, size: 132, rotation: 24, layer: 1 },
+    { variant: "petal", x: 46, y: 90, size: 46, rotation: -25, layer: 5 }
   ]
 ];
 
@@ -105,54 +104,29 @@ const spreadSlots = [
 
 const pageCompositions = [
   [
-    { kind: "botanical", variant: "petal", x: 75, y: 69, size: 56, rotation: -16 },
-    { kind: "botanical", variant: "daisy", x: 17, y: 82, size: 48, rotation: 11 },
-    { kind: "botanical", variant: "leaves", x: 94, y: 71, size: 68, rotation: -21 },
-    { kind: "imprint", variant: "stamp", x: 88, y: 43, size: 46, rotation: 7, opacity: .22 },
-    { kind: "imprint", variant: "pencil", x: 14, y: 53, size: 62, rotation: -6, opacity: .2 }
+    { kind: "botanical", variant: "rose", x: 7, y: 79, size: 132, rotation: -19, opacity: .46 },
+    { kind: "botanical", variant: "petal", x: 24, y: 88, size: 44, rotation: 24, opacity: .4 }
   ],
   [
-    { kind: "botanical", variant: "fern", x: 86, y: 73, size: 82, rotation: 18 },
-    { kind: "botanical", variant: "petal", x: 61, y: 85, size: 42, rotation: -29 },
-    { kind: "imprint", variant: "coin", x: 18, y: 71, size: 52, rotation: -9, opacity: .18 },
-    { kind: "botanical", variant: "daisy", x: 9, y: 45, size: 43, rotation: -13 },
-    { kind: "imprint", variant: "pressure", x: 56, y: 88, size: 72, rotation: 3, opacity: .17 },
-    { kind: "imprint", variant: "pencil", x: 91, y: 33, size: 55, rotation: 8, opacity: .18 }
+    { kind: "botanical", variant: "fern", x: 69, y: 93, size: 174, rotation: 14, opacity: .3 }
   ],
   [
-    { kind: "botanical", variant: "rose", x: 21, y: 82, size: 62, rotation: -17 },
-    { kind: "botanical", variant: "petal", x: 69, y: 76, size: 39, rotation: 26 },
-    { kind: "botanical", variant: "fern", x: 6, y: 49, size: 76, rotation: 24 },
-    { kind: "imprint", variant: "vine", x: 92, y: 58, size: 84, rotation: -7, opacity: .21 },
-    { kind: "imprint", variant: "corner", x: 82, y: 36, size: 58, rotation: 3, opacity: .18 }
+    { kind: "botanical", variant: "petal", x: 72, y: 76, size: 52, rotation: -18, opacity: .46 },
+    { kind: "botanical", variant: "petal", x: 83, y: 82, size: 39, rotation: 29, opacity: .38 },
+    { kind: "imprint", variant: "pencil", x: 66, y: 86, size: 82, rotation: -6, opacity: .18 }
   ],
   [
-    { kind: "botanical", variant: "violet", x: 19, y: 76, size: 58, rotation: -24 },
-    { kind: "botanical", variant: "petal", x: 67, y: 87, size: 40, rotation: 20 },
-    { kind: "botanical", variant: "leaves", x: 95, y: 48, size: 65, rotation: -20 },
-    { kind: "imprint", variant: "coin", x: 82, y: 84, size: 45, rotation: 11, opacity: .19 },
-    { kind: "imprint", variant: "pencil", x: 12, y: 58, size: 61, rotation: -9, opacity: .2 }
+    { kind: "imprint", variant: "coin", x: 91, y: 70, size: 74, rotation: 9, opacity: .2 }
   ],
   [
-    { kind: "botanical", variant: "leaves", x: 82, y: 71, size: 74, rotation: -17 },
-    { kind: "botanical", variant: "petal", x: 25, y: 86, size: 38, rotation: 31 },
-    { kind: "botanical", variant: "rose", x: 95, y: 87, size: 54, rotation: 19 },
-    { kind: "imprint", variant: "stamp", x: 15, y: 48, size: 42, rotation: -5, opacity: .2 },
-    { kind: "imprint", variant: "pencil", x: 62, y: 57, size: 58, rotation: 5, opacity: .16 }
+    { kind: "botanical", variant: "leaves", x: 98, y: 69, size: 156, rotation: -22, opacity: .39 }
   ],
   [
-    { kind: "botanical", variant: "violet", x: 30, y: 82, size: 55, rotation: -12 },
-    { kind: "imprint", variant: "pressure", x: 76, y: 80, size: 88, rotation: -4, opacity: .17 },
-    { kind: "botanical", variant: "daisy", x: 92, y: 47, size: 44, rotation: 16 },
-    { kind: "imprint", variant: "vine", x: 10, y: 67, size: 69, rotation: 12, opacity: .19 },
-    { kind: "imprint", variant: "pencil", x: 59, y: 37, size: 60, rotation: -4, opacity: .17 }
+    { kind: "imprint", variant: "pressure", x: 24, y: 86, size: 116, rotation: -5, opacity: .16 }
   ],
   [
-    { kind: "botanical", variant: "daisy", x: 88, y: 77, size: 55, rotation: 15 },
-    { kind: "botanical", variant: "leaves", x: 18, y: 84, size: 68, rotation: -21 },
-    { kind: "botanical", variant: "petal", x: 7, y: 58, size: 41, rotation: 27 },
-    { kind: "imprint", variant: "pressure", x: 57, y: 86, size: 69, rotation: 4, opacity: .17 },
-    { kind: "imprint", variant: "corner", x: 88, y: 39, size: 56, rotation: -5, opacity: .18 }
+    { kind: "botanical", variant: "daisy", x: 9, y: 82, size: 104, rotation: 16, opacity: .43 },
+    { kind: "botanical", variant: "petal", x: 23, y: 73, size: 42, rotation: -24, opacity: .36 }
   ]
 ];
 
@@ -176,7 +150,8 @@ function makeBotanical(variant, slot, random, options = {}) {
   element.style.setProperty("--botanical-y", `${slot.y + (random() - .5) * 4}%`);
   element.style.setProperty("--botanical-size", `${slot.size * (minScale + random() * scaleVariance)}px`);
   element.style.setProperty("--botanical-rotation", `${slot.rotation + (random() - .5) * 22}deg`);
-  element.style.setProperty("--botanical-opacity", `${minOpacity + random() * opacityVariance}`);
+  element.style.setProperty("--botanical-opacity", `${slot.opacity ?? (minOpacity + random() * opacityVariance)}`);
+  element.style.setProperty("--botanical-layer", `${slot.layer ?? 1}`);
   return element;
 }
 
@@ -201,8 +176,8 @@ function render(container, slots, count, seedText, options) {
 }
 
 export function createDecorationController({ cover, spread, ornament }) {
-  const coverLayout = coverLayouts[Math.floor(Math.random() * coverLayouts.length)];
-  render(cover, coverLayout, coverLayout.length, `cover-${Date.now()}`, {
+  const coverComposition = coverCompositions[Math.floor(Math.random() * coverCompositions.length)];
+  render(cover, coverComposition, coverComposition.length, `cover-${Date.now()}`, {
     minOpacity: .82,
     opacityVariance: .18,
     minScale: .9,
