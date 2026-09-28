@@ -54,6 +54,7 @@ const hintController = createHintController({
   skipButton: document.querySelector("#skip-button"),
   getRemaining: () => [...elements.hotspots.querySelectorAll('.hotspot[data-target="true"]:not(.is-found)')],
   onHint: (button) => manager.hint(button),
+  onPersistentHint: (button) => manager.persistentHint(button),
   onShowOne: (button) => manager.showOne(button),
   onSkip: () => manager.skip()
 });

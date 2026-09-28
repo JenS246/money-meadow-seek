@@ -185,6 +185,11 @@ export class SceneManager {
     if (item) this.magnifier.nudge(button);
   }
 
+  persistentHint(button) {
+    const item = this.activeTargets.find((target) => target.id === button.dataset.id);
+    if (item && !this.found.has(item.id)) this.ambient.persistHint(item);
+  }
+
   showOne(button) {
     const item = this.activeTargets.find((target) => target.id === button.dataset.id);
     if (item) this.find(item, button);
@@ -193,6 +198,7 @@ export class SceneManager {
   find(item, button) {
     if (this.turning || this.found.has(item.id)) return;
     this.found.add(item.id);
+    this.ambient.clearHint(item.id);
     button.classList.add("is-found");
     button.setAttribute("aria-label", `Found: ${item.label}`);
     button.setAttribute("aria-pressed", "true");

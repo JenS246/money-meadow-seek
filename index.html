@@ -6,11 +6,10 @@
     <meta name="theme-color" content="#182015" />
     <meta name="description" content="A quiet seek-and-find game in a strange, abundant meadow." />
     <title>Money Meadow</title>
-    <link rel="preload" href="./assets/scenes/cottage-garden.png" as="image" fetchpriority="high" />
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <section class="cover-view" id="cover-view" aria-labelledby="cover-title" hidden>
+    <main class="cover-view" id="cover-view" aria-labelledby="cover-title" hidden>
       <div class="botanical-spill botanical-spill--cover" id="cover-botanicals" aria-hidden="true"></div>
       <div class="closed-book" id="closed-book">
         <div class="cover-board" aria-hidden="true"></div>
@@ -24,9 +23,9 @@
         </div>
         <div class="cover-pages" aria-hidden="true"></div>
       </div>
-    </section>
+    </main>
 
-    <section class="intro-view" id="intro-view" aria-labelledby="intro-title" hidden>
+    <main class="intro-view" id="intro-view" aria-labelledby="intro-title" hidden>
       <div class="book intro-book" id="intro-book">
         <section class="book-page book-page--left intro-page intro-page--left">
           <div class="intro-copy">
@@ -45,7 +44,7 @@
         </section>
         <section class="book-page book-page--right intro-page intro-page--right">
           <div class="intro-plate" aria-hidden="true">
-            <img src="./assets/scenes/cottage-garden.png" alt="" draggable="false" />
+            <img src="./assets/scenes/cottage-garden.webp" alt="" draggable="false" loading="lazy" decoding="async" />
             <span class="intro-found-mark"></span>
             <span class="intro-wrong-mark"></span>
             <span class="intro-lens"><span></span></span>
@@ -54,7 +53,7 @@
           <button class="intro-begin" id="intro-begin" type="button">Begin</button>
         </section>
       </div>
-    </section>
+    </main>
 
     <main class="book game-book" id="page" aria-labelledby="game-title" hidden>
       <div class="botanical-spill botanical-spill--spread" id="spread-botanicals" aria-hidden="true"></div>
@@ -101,7 +100,7 @@
         <div class="scene" id="scene" aria-label="Seek-and-find scene">
           <img class="scene__next-image" id="scene-next-image" alt="" draggable="false" aria-hidden="true" />
           <div class="page-sheet" id="page-sheet">
-            <img id="scene-image" alt="" draggable="false" />
+            <img id="scene-image" alt="" draggable="false" fetchpriority="high" decoding="async" />
             <span class="page-sheet__back" aria-hidden="true"></span>
           </div>
           <span class="page-turn-shadow" aria-hidden="true"></span>

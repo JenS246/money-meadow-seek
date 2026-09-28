@@ -2,7 +2,7 @@ const HINT_DELAY = 17000;
 const REVEAL_DELAY = 12000;
 const SKIP_DELAY = 41000;
 
-export function createHintController({ button, showOneButton, skipButton, getRemaining, onHint, onShowOne, onSkip }) {
+export function createHintController({ button, showOneButton, skipButton, getRemaining, onHint, onPersistentHint, onShowOne, onSkip }) {
   let hintTimer;
   let revealTimer;
   let skipTimer;
@@ -50,13 +50,15 @@ export function createHintController({ button, showOneButton, skipButton, getRem
     clearTimeout(revealTimer);
     revealTimer = setTimeout(() => {
       if (!getRemaining().length) return;
+      onPersistentHint(choice);
       button.hidden = false;
       showOneButton.hidden = false;
     }, REVEAL_DELAY);
   });
 
   showOneButton.addEventListener("click", () => {
-    const choice = chooseRemaining();
+    const remaining = getRemaining();
+    const choice = remaining.includes(lastHinted) ? lastHinted : chooseRemaining();
     if (!choice) return;
     showOneButton.hidden = true;
     onShowOne(choice);

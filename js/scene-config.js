@@ -10,7 +10,7 @@ const challenge = (type, instruction, targetIds) => ({ type, instruction, target
 
 export const scenes = [
   {
-    id: "cottage-garden", image: "./assets/scenes/cottage-garden.png", title: "The Cottage Garden",
+    id: "cottage-garden", image: "./assets/scenes/cottage-garden.webp", title: "The Cottage Garden",
     layout: "full",
     mobilePosition: "48% 50%", ambient: { type: "butterfly", x: 62, y: 32 },
     objects: [
@@ -34,7 +34,7 @@ export const scenes = [
     ]
   },
   {
-    id: "rain-meadow", image: "./assets/scenes/rain-meadow.png", title: "After the Rain",
+    id: "rain-meadow", image: "./assets/scenes/rain-meadow.webp", title: "After the Rain",
     layout: "captioned", caption: "After a passing shower.",
     mobilePosition: "52% 50%", ambient: { type: "raindrop", x: 82, y: 32 },
     objects: [
@@ -57,7 +57,7 @@ export const scenes = [
     ]
   },
   {
-    id: "stone-wall", image: "./assets/scenes/stone-wall.png", title: "The Old Wall",
+    id: "stone-wall", image: "./assets/scenes/stone-wall.webp", title: "The Old Wall",
     layout: "plate",
     mobilePosition: "54% 50%", ambient: { type: "insect", x: 58, y: 38 },
     objects: [
@@ -80,7 +80,7 @@ export const scenes = [
     ]
   },
   {
-    id: "greenhouse", image: "./assets/scenes/greenhouse.png", title: "The Glass House",
+    id: "greenhouse", image: "./assets/scenes/greenhouse.webp", title: "The Glass House",
     layout: "tall",
     mobilePosition: "48% 50%", ambient: { type: "condensation", x: 54, y: 20 },
     objects: [
@@ -105,7 +105,7 @@ export const scenes = [
     ]
   },
   {
-    id: "woodland-edge", image: "./assets/scenes/woodland-edge.png", title: "Where the Woods Begin",
+    id: "woodland-edge", image: "./assets/scenes/woodland-edge.webp", title: "Where the Woods Begin",
     layout: "full",
     mobilePosition: "49% 50%", ambient: { type: "fern", x: 51, y: 62 },
     objects: [
@@ -128,7 +128,7 @@ export const scenes = [
     ]
   },
   {
-    id: "rose-path", image: "./assets/scenes/rose-path.png", title: "The Rose Path",
+    id: "rose-path", image: "./assets/scenes/rose-path.webp", title: "The Rose Path",
     layout: "captioned", caption: "The path at dusk.",
     mobilePosition: "52% 50%", ambient: { type: "petal", x: 45, y: 26 },
     objects: [
@@ -154,7 +154,7 @@ export const scenes = [
     ]
   },
   {
-    id: "summer-field", image: "./assets/scenes/summer-field.png", title: "Late Summer",
+    id: "summer-field", image: "./assets/scenes/summer-field.webp", title: "Late Summer",
     layout: "tall",
     mobilePosition: "52% 50%", ambient: { type: "seed", x: 68, y: 38 },
     objects: [
@@ -179,7 +179,7 @@ export const scenes = [
     ]
   },
   {
-    id: "secret-garden", image: "./assets/scenes/secret-garden.png", title: "The Impossible Garden",
+    id: "secret-garden", image: "./assets/scenes/secret-garden.webp", title: "The Impossible Garden",
     layout: "plate",
     mobilePosition: "51% 50%", ambient: { type: "impossible", x: 53, y: 41 },
     objects: [

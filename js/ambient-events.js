@@ -9,7 +9,7 @@ function cue(container, type, x, y, purpose = "ambient") {
   element.style.top = `${y}%`;
   container.append(element);
   element.addEventListener("animationend", () => element.remove(), { once: true });
-  setTimeout(() => element.remove(), 2600);
+  setTimeout(() => element.remove(), purpose === "hint" ? 4300 : 2600);
 }
 
 export function createAmbientController(container) {
@@ -39,7 +39,20 @@ export function createAmbientController(container) {
     hint(item) {
       cue(container, item.hint || "rustle", item.x, item.y, "hint");
     },
+    persistHint(item) {
+      if (container.querySelector(`[data-hint-id="${item.id}"]`)) return;
+      const element = document.createElement("span");
+      element.className = `persistent-hint persistent-hint--${item.hint || "rustle"}`;
+      element.dataset.hintId = item.id;
+      element.style.left = `${item.x}%`;
+      element.style.top = `${item.y}%`;
+      container.append(element);
+    },
+    clearHint(itemId) {
+      container.querySelector(`[data-hint-id="${itemId}"]`)?.remove();
+    },
     found(item) {
+      container.querySelector(`[data-hint-id="${item.id}"]`)?.remove();
       cue(container, item.found || item.hint || "shine", item.x, item.y, "found");
     },
     miss(item) {

@@ -72,12 +72,20 @@ export function createMagnifierController({ scene, control, lens, offset, world,
   });
 
   const observer = new MutationObserver((changes) => {
-    changes.forEach((change) => change.addedNodes.forEach((node) => {
-      if (!(node instanceof HTMLElement)) return;
-      const clone = node.cloneNode(true);
-      ambientMirror.append(clone);
-      setTimeout(() => clone.remove(), 2600);
-    }));
+    changes.forEach((change) => {
+      change.addedNodes.forEach((node) => {
+        if (!(node instanceof HTMLElement)) return;
+        const clone = node.cloneNode(true);
+        ambientMirror.append(clone);
+        if (!node.classList.contains("persistent-hint")) {
+          setTimeout(() => clone.remove(), node.classList.contains("cue--hint") ? 4300 : 2600);
+        }
+      });
+      change.removedNodes.forEach((node) => {
+        if (!(node instanceof HTMLElement) || !node.dataset.hintId) return;
+        ambientMirror.querySelector(`[data-hint-id="${node.dataset.hintId}"]`)?.remove();
+      });
+    });
   });
   observer.observe(ambientSource, { childList: true });
 
