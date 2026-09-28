@@ -7,10 +7,10 @@ A small browser-based seek-and-find game presented as a tactile illustrated book
 - Eight scene artworks, 77 discoverable details, and 44 curated challenge variations are configured in `js/scene-config.js`.
 - A clothbound cover and short first-visit instruction spread lead into the puzzles. Returning players go directly to their next spread, while in-book controls keep the cover and instructions available.
 - Each visit selects a challenge containing one to five objects, follows a varied difficulty rhythm, and avoids recently used scenes, challenge types, and target sets.
-- Every known object remains interactive: active targets receive persistent hand-drawn circles and pencil checks, known non-targets wobble and briefly receive a clear graphite X beside them without advancing progress, and empty space gives only a subtle environmental disturbance.
+- Every known object remains interactive: active targets receive persistent hand-drawn circles and pencil checks, known non-targets wobble, receive a clear lingering graphite X, and briefly print “Not this one.” beneath the challenge without advancing progress. Empty space gives only a subtle environmental disturbance.
 - Hotspots scale with each scene and support mouse, touch, keyboard, and screen-reader labels.
 - Help arrives gradually without a clock or penalty: a subtle environmental hint appears first, then leaves a quiet persistent cue near the object, followed later by an optional one-object reveal and a skip-page control.
-- A small randomized pool of watercolor flowers, leaves, petals, and ferns scatters around the cover and spills irregularly beyond selected spreads.
+- A generous randomized pool of watercolor flowers, leaves, petals, and ferns scatters around the cover, spills irregularly beyond spreads, and leaves pressed fragments on the gameplay pages.
 - Gameplay pages vary pressed botanicals, faint currency marks, stamps, pressure marks, and margin flourishes so the paper feels handled without obscuring the puzzle text.
 - An optional physical magnifying glass follows the pointer on desktop, supports keyboard positioning, and appears with a press-and-hold gesture on touch screens. It magnifies the artwork, ambient cues, and persistent found marks together.
 - Desktop uses a restrained two-page spread with layered page edges, a curved gutter, and four intentional illustration-margin treatments; smaller screens collapse to one continuous page.

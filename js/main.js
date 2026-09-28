@@ -23,6 +23,7 @@ const elements = {
   progress: document.querySelector("#progress"),
   progressMarks: document.querySelector("#progress-marks"),
   progressText: document.querySelector("#progress-text"),
+  answerFeedback: document.querySelector("#answer-feedback"),
   completion: document.querySelector("#completion"),
   turnButton: document.querySelector("#turn-button"),
   cornerTurn: document.querySelector("#corner-turn"),

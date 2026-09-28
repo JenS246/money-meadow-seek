@@ -35,18 +35,23 @@ const spreadSlots = [
 const pageCompositions = [
   [
     { kind: "botanical", variant: "petal", x: 75, y: 69, size: 56, rotation: -16 },
+    { kind: "botanical", variant: "daisy", x: 17, y: 82, size: 48, rotation: 11 },
     { kind: "imprint", variant: "stamp", x: 88, y: 43, size: 46, rotation: 7, opacity: .2 }
   ],
   [
     { kind: "botanical", variant: "fern", x: 86, y: 73, size: 82, rotation: 18 },
+    { kind: "botanical", variant: "petal", x: 61, y: 85, size: 42, rotation: -29 },
     { kind: "imprint", variant: "coin", x: 18, y: 71, size: 52, rotation: -9, opacity: .18 },
     { kind: "imprint", variant: "pressure", x: 56, y: 88, size: 72, rotation: 3, opacity: .15 }
   ],
   [
+    { kind: "botanical", variant: "rose", x: 21, y: 82, size: 62, rotation: -17 },
+    { kind: "botanical", variant: "petal", x: 69, y: 76, size: 39, rotation: 26 },
     { kind: "imprint", variant: "vine", x: 92, y: 58, size: 84, rotation: -7, opacity: .19 }
   ],
   [
     { kind: "botanical", variant: "violet", x: 19, y: 76, size: 58, rotation: -24 },
+    { kind: "botanical", variant: "petal", x: 67, y: 87, size: 40, rotation: 20 },
     { kind: "imprint", variant: "coin", x: 82, y: 84, size: 45, rotation: 11, opacity: .16 }
   ],
   [
@@ -55,11 +60,14 @@ const pageCompositions = [
     { kind: "imprint", variant: "stamp", x: 15, y: 48, size: 42, rotation: -5, opacity: .17 }
   ],
   [
+    { kind: "botanical", variant: "violet", x: 30, y: 82, size: 55, rotation: -12 },
     { kind: "imprint", variant: "pressure", x: 76, y: 80, size: 88, rotation: -4, opacity: .17 },
     { kind: "imprint", variant: "vine", x: 10, y: 67, size: 69, rotation: 12, opacity: .16 }
   ],
   [
-    { kind: "botanical", variant: "daisy", x: 88, y: 77, size: 55, rotation: 15 }
+    { kind: "botanical", variant: "daisy", x: 88, y: 77, size: 55, rotation: 15 },
+    { kind: "botanical", variant: "leaves", x: 18, y: 84, size: 68, rotation: -21 },
+    { kind: "imprint", variant: "pressure", x: 57, y: 86, size: 69, rotation: 4, opacity: .14 }
   ]
 ];
 
@@ -104,11 +112,11 @@ function render(container, slots, count, seedText) {
 }
 
 export function createDecorationController({ cover, spread, ornament }) {
-  render(cover, coverSlots, 10 + Math.floor(Math.random() * 3), `cover-${Date.now()}`);
+  render(cover, coverSlots, 13 + Math.floor(Math.random() * 3), `cover-${Date.now()}`);
 
   return {
     showSpread(pageNumber, sceneId) {
-      const counts = [3, 5, 1, 4, 6, 2, 4];
+      const counts = [5, 7, 3, 6, 8, 4, 6];
       const count = counts[(pageNumber - 1) % counts.length];
       render(spread, spreadSlots, count, `${sceneId}-${pageNumber}`);
 

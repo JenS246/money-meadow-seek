@@ -88,7 +88,7 @@ export function createAmbientController(container) {
       mark.style.left = `${clamp(4, x, 96)}%`;
       mark.style.top = `${clamp(5, y, 95)}%`;
       container.append(mark);
-      setTimeout(() => mark.remove(), 1120);
+      setTimeout(() => mark.remove(), 1900);
     },
     empty(x, y) {
       cue(container, "empty", x, y, "empty");
