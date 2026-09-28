@@ -1,4 +1,5 @@
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const clamp = (minimum, value, maximum) => Math.max(minimum, Math.min(value, maximum));
 
 function cue(container, type, x, y, purpose = "ambient") {
   if (reducedMotion.matches) return;
@@ -43,12 +44,38 @@ export function createAmbientController(container) {
     },
     miss(item) {
       cue(container, item.hint || "rustle", item.x, item.y, "miss");
+
+      if (!reducedMotion.matches && currentScene) {
+        const bounds = container.getBoundingClientRect();
+        const width = Math.max(46, bounds.width * item.width / 100);
+        const height = Math.max(46, bounds.height * item.height / 100);
+        const wobble = document.createElement("span");
+        const image = document.createElement("img");
+        wobble.className = "object-wobble";
+        wobble.style.left = `${item.x}%`;
+        wobble.style.top = `${item.y}%`;
+        wobble.style.width = `${width}px`;
+        wobble.style.height = `${height}px`;
+        image.src = currentScene.image;
+        image.alt = "";
+        image.style.width = `${bounds.width}px`;
+        image.style.height = `${bounds.height}px`;
+        image.style.left = `${width / 2 - bounds.width * item.x / 100}px`;
+        image.style.top = `${height / 2 - bounds.height * item.y / 100}px`;
+        wobble.append(image);
+        container.append(wobble);
+        setTimeout(() => wobble.remove(), 620);
+      }
+
       const mark = document.createElement("span");
       mark.className = "pencil-x";
-      mark.style.left = `${item.x}%`;
-      mark.style.top = `${item.y}%`;
+      const horizontalOffset = Math.max(4.2, item.width * .72);
+      const x = item.x > 78 ? item.x - horizontalOffset : item.x + horizontalOffset;
+      const y = item.y < 16 ? item.y + 5 : item.y - 3;
+      mark.style.left = `${clamp(4, x, 96)}%`;
+      mark.style.top = `${clamp(5, y, 95)}%`;
       container.append(mark);
-      setTimeout(() => mark.remove(), 780);
+      setTimeout(() => mark.remove(), 1120);
     },
     empty(x, y) {
       cue(container, "empty", x, y, "empty");

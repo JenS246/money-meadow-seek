@@ -7,7 +7,7 @@ A small browser-based seek-and-find game presented as a tactile illustrated book
 - Eight scene artworks, 77 discoverable details, and 44 curated challenge variations are configured in `js/scene-config.js`.
 - A clothbound cover and short first-visit instruction spread lead into the puzzles. Returning players go directly to their next spread, while in-book controls keep the cover and instructions available.
 - Each visit selects a challenge containing one to five objects, follows a varied difficulty rhythm, and avoids recently used scenes, challenge types, and target sets.
-- Every known object remains interactive: active targets receive varied hand-drawn circles and pencil checks, known non-targets briefly receive a soft pencil X without advancing progress, and empty space gives only a subtle environmental disturbance.
+- Every known object remains interactive: active targets receive persistent hand-drawn circles and pencil checks, known non-targets wobble and briefly receive a clear graphite X beside them without advancing progress, and empty space gives only a subtle environmental disturbance.
 - Hotspots scale with each scene and support mouse, touch, keyboard, and screen-reader labels.
 - A subtle hint becomes available after 20 seconds without a find.
 - An optional physical magnifying glass follows the pointer on desktop, supports keyboard positioning, and appears with a press-and-hold gesture on touch screens. It magnifies the artwork, ambient cues, and persistent found marks together.
