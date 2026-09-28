@@ -4,6 +4,7 @@ import { toggleSound } from "./audio.js";
 import { createAmbientController } from "./ambient-events.js";
 import { createMagnifierController } from "./magnifier.js";
 import { createBookFlow } from "./book-flow.js";
+import { createDecorationController } from "./decorations.js";
 
 const elements = {
   leftPageNumber: document.querySelector("#left-page-number"),
@@ -42,13 +43,22 @@ const magnifier = createMagnifierController({
   ambientSource: document.querySelector("#ambient"),
   ambientMirror: document.querySelector("#magnifier-ambient")
 });
+const decorations = createDecorationController({
+  cover: document.querySelector("#cover-botanicals"),
+  spread: document.querySelector("#spread-botanicals"),
+  ornament: document.querySelector("#page-ornament")
+});
 const hintController = createHintController({
   button: document.querySelector("#hint-button"),
+  showOneButton: document.querySelector("#show-one-button"),
+  skipButton: document.querySelector("#skip-button"),
   getRemaining: () => [...elements.hotspots.querySelectorAll('.hotspot[data-target="true"]:not(.is-found)')],
-  onHint: (button) => manager.hint(button)
+  onHint: (button) => manager.hint(button),
+  onShowOne: (button) => manager.showOne(button),
+  onSkip: () => manager.skip()
 });
 
-manager = new SceneManager(elements, hintController, ambientController, magnifier);
+manager = new SceneManager(elements, hintController, ambientController, magnifier, decorations);
 manager.start();
 elements.turnButton.addEventListener("click", () => manager.next());
 elements.cornerTurn.addEventListener("click", () => manager.next());
@@ -71,7 +81,9 @@ createBookFlow({
   openButton: document.querySelector("#cover-open"),
   beginButton: document.querySelector("#intro-begin"),
   coverButtons: [document.querySelector("#intro-cover"), document.querySelector("#show-cover")],
-  howButton: document.querySelector("#how-to-play")
+  howButton: document.querySelector("#how-to-play"),
+  onGameShown: () => hintController.schedule(),
+  onGameHidden: () => hintController.hide()
 });
 
 const soundButton = document.querySelector("#sound-button");

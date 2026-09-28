@@ -215,7 +215,8 @@ const bandFor = (challengeItem) => {
   if (count === 1) return "quick";
   if (count === 2) return "easy";
   if (count === 3) return "medium";
-  return "hard";
+  if (count === 4) return "hard";
+  return "long";
 };
 
 export function challengeFamily(challengeItem) { return familyFor(challengeItem.type); }
@@ -227,7 +228,10 @@ export function chooseChallenge(scene, recentTypes = [], recentTargetSets = [], 
     if (bandFor(item) === preferredBand) score += 4;
     if (!recentTypes.includes(item.type)) score += 2;
     if (!recentTargetSets.includes(key)) score += 2;
-    if (!recentFamilies.includes(familyFor(item.type))) score += 1.5;
+    const family = familyFor(item.type);
+    if (!recentFamilies.includes(family)) score += 3;
+    if (recentFamilies.at(-1) !== family) score += 2;
+    if (family === "category" && recentFamilies.length >= 2 && recentFamilies.slice(-2).every((recent) => recent === "category")) score -= 5;
     return { item, score };
   });
   scored.sort((a, b) => b.score - a.score);

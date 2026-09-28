@@ -1,23 +1,76 @@
-export function createHintController({ button, getRemaining, onHint }) {
-  let timer;
+const HINT_DELAY = 17000;
+const REVEAL_DELAY = 12000;
+const SKIP_DELAY = 41000;
+
+export function createHintController({ button, showOneButton, skipButton, getRemaining, onHint, onShowOne, onSkip }) {
+  let hintTimer;
+  let revealTimer;
+  let skipTimer;
+  let reEnableTimer;
   let lastHinted;
 
-  const hide = () => { button.hidden = true; clearTimeout(timer); };
+  const clearTimers = () => {
+    clearTimeout(hintTimer);
+    clearTimeout(revealTimer);
+    clearTimeout(skipTimer);
+    clearTimeout(reEnableTimer);
+  };
+
+  const chooseRemaining = () => {
+    const remaining = getRemaining();
+    const fresh = remaining.filter((item) => item !== lastHinted);
+    const pool = fresh.length ? fresh : remaining;
+    return pool[Math.floor(Math.random() * pool.length)];
+  };
+
+  const hide = () => {
+    clearTimers();
+    button.hidden = true;
+    showOneButton.hidden = true;
+    skipButton.hidden = true;
+  };
+
   const schedule = () => {
     hide();
-    timer = setTimeout(() => { if (getRemaining().length) button.hidden = false; }, 20000);
+    lastHinted = undefined;
+    hintTimer = setTimeout(() => {
+      if (getRemaining().length) button.hidden = false;
+    }, HINT_DELAY);
+    skipTimer = setTimeout(() => {
+      if (getRemaining().length) skipButton.hidden = false;
+    }, SKIP_DELAY);
   };
 
   button.addEventListener("click", () => {
-    const remaining = getRemaining().filter((item) => item !== lastHinted);
-    const pool = remaining.length ? remaining : getRemaining();
-    const choice = pool[Math.floor(Math.random() * pool.length)];
+    const choice = chooseRemaining();
     if (!choice) return;
     lastHinted = choice;
     onHint(choice);
     button.hidden = true;
-    timer = setTimeout(() => button.hidden = false, 20000);
+    clearTimeout(revealTimer);
+    revealTimer = setTimeout(() => {
+      if (!getRemaining().length) return;
+      button.hidden = false;
+      showOneButton.hidden = false;
+    }, REVEAL_DELAY);
   });
+
+  showOneButton.addEventListener("click", () => {
+    const choice = chooseRemaining();
+    if (!choice) return;
+    showOneButton.hidden = true;
+    onShowOne(choice);
+    if (!getRemaining().length) {
+      skipButton.hidden = true;
+      return;
+    }
+    skipButton.hidden = false;
+    reEnableTimer = setTimeout(() => {
+      if (getRemaining().length) showOneButton.hidden = false;
+    }, 900);
+  });
+
+  skipButton.addEventListener("click", onSkip);
 
   return { schedule, hide };
 }

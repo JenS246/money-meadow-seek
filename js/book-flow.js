@@ -3,7 +3,7 @@ import { loadProgress, saveProgress } from "./storage.js";
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const wait = (duration) => new Promise((resolve) => setTimeout(resolve, duration));
 
-export function createBookFlow({ cover, closedBook, intro, introBook, game, openButton, beginButton, coverButtons, howButton }) {
+export function createBookFlow({ cover, closedBook, intro, introBook, game, openButton, beginButton, coverButtons, howButton, onGameShown, onGameHidden }) {
   let fromGame = false;
 
   const showOnly = (view) => {
@@ -14,12 +14,14 @@ export function createBookFlow({ cover, closedBook, intro, introBook, game, open
     introBook.classList.add("is-turning");
     await wait(reducedMotion.matches ? 20 : 650);
     showOnly(game);
+    onGameShown();
     introBook.classList.remove("is-turning");
     game.classList.add("is-opening");
     requestAnimationFrame(() => game.classList.remove("is-opening"));
   };
 
   const showCover = async () => {
+    onGameHidden();
     if (!game.hidden) {
       game.classList.add("is-closing");
       await wait(reducedMotion.matches ? 20 : 480);
@@ -33,7 +35,10 @@ export function createBookFlow({ cover, closedBook, intro, introBook, game, open
   openButton.addEventListener("click", async () => {
     closedBook.classList.add("is-opening");
     await wait(reducedMotion.matches ? 20 : 780);
-    if (loadProgress().seenInstructions) showOnly(game);
+    if (loadProgress().seenInstructions) {
+      showOnly(game);
+      onGameShown();
+    }
     else showOnly(intro);
   });
 
@@ -43,6 +48,7 @@ export function createBookFlow({ cover, closedBook, intro, introBook, game, open
   });
 
   howButton.addEventListener("click", () => {
+    onGameHidden();
     fromGame = true;
     beginButton.textContent = "Back to meadow";
     showOnly(intro);
@@ -50,8 +56,13 @@ export function createBookFlow({ cover, closedBook, intro, introBook, game, open
 
   coverButtons.forEach((button) => button.addEventListener("click", showCover));
 
-  if (loadProgress().seenInstructions) showOnly(game);
-  else showOnly(cover);
+  if (loadProgress().seenInstructions) {
+    showOnly(game);
+    onGameShown();
+  } else {
+    showOnly(cover);
+    onGameHidden();
+  }
 
   return { showCover, showGame, get fromGame() { return fromGame; } };
 }

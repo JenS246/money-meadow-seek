@@ -7,11 +7,12 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 const narrowScreen = window.matchMedia("(max-width: 859px)");
 
 export class SceneManager {
-  constructor(elements, hintController, ambientController, magnifier) {
+  constructor(elements, hintController, ambientController, magnifier, decorations) {
     this.els = elements;
     this.hints = hintController;
     this.ambient = ambientController;
     this.magnifier = magnifier;
+    this.decorations = decorations;
     this.progress = loadProgress();
     this.pageNumber = this.progress.pagesCompleted + 1;
     this.current = null;
@@ -43,7 +44,7 @@ export class SceneManager {
   }
 
   pickChallenge(scene) {
-    const rhythm = ["easy", "medium", "quick", "hard", "easy"];
+    const rhythm = ["easy", "medium", "quick", "hard", "easy", "medium", "quick"];
     return chooseChallenge(
       scene,
       this.history.types.slice(-2),
@@ -53,8 +54,8 @@ export class SceneManager {
     );
   }
 
-  async next() {
-    if (this.turning || !this.pageComplete || this.els.completion.hidden) return;
+  async next({ force = false } = {}) {
+    if (this.turning || (!force && (!this.pageComplete || this.els.completion.hidden))) return;
     this.turning = true;
     clearTimeout(this.completionTimer);
     this.hints.hide();
@@ -125,6 +126,7 @@ export class SceneManager {
     this.els.foldImage.src = scene.image;
     this.magnifier.setImage(scene.image);
     this.magnifier.resetMarks();
+    this.decorations.showSpread(this.pageNumber, scene.id);
     if (preloaded || this.els.image.complete) this.els.loading.classList.remove("is-visible");
 
     this.recordSelection(scene, selectedChallenge);
@@ -183,6 +185,11 @@ export class SceneManager {
     if (item) this.magnifier.nudge(button);
   }
 
+  showOne(button) {
+    const item = this.activeTargets.find((target) => target.id === button.dataset.id);
+    if (item) this.find(item, button);
+  }
+
   find(item, button) {
     if (this.turning || this.found.has(item.id)) return;
     this.found.add(item.id);
@@ -220,12 +227,22 @@ export class SceneManager {
     this.ambient.miss(item);
     playMiss();
     this.els.announcer.textContent = "Not a target for this page.";
-    this.hints.schedule();
   }
 
   emptySpace(x, y) {
     if (this.turning || this.pageComplete) return;
     this.ambient.empty(x, y);
+  }
+
+  skip() {
+    if (this.turning || this.pageComplete) return;
+    this.pageComplete = true;
+    this.hints.hide();
+    this.progress.pagesCompleted += 1;
+    this.progress.lastSceneId = this.current.id;
+    saveProgress(this.progress);
+    this.els.announcer.textContent = "Turning to another page.";
+    this.next({ force: true });
   }
 
   complete() {

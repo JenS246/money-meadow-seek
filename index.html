@@ -11,6 +11,7 @@
   </head>
   <body>
     <section class="cover-view" id="cover-view" aria-labelledby="cover-title" hidden>
+      <div class="botanical-spill botanical-spill--cover" id="cover-botanicals" aria-hidden="true"></div>
       <div class="closed-book" id="closed-book">
         <div class="cover-board" aria-hidden="true"></div>
         <div class="cover-face">
@@ -56,6 +57,7 @@
     </section>
 
     <main class="book game-book" id="page" aria-labelledby="game-title" hidden>
+      <div class="botanical-spill botanical-spill--spread" id="spread-botanicals" aria-hidden="true"></div>
       <section class="book-page book-page--left">
         <div class="book-page__content">
           <header class="book-heading">
@@ -76,6 +78,8 @@
 
           <div class="book-actions">
             <button class="text-button" id="hint-button" type="button" hidden>Hint</button>
+            <button class="text-button" id="show-one-button" type="button" hidden>Show one</button>
+            <button class="text-button" id="skip-button" type="button" hidden>Skip page</button>
             <button class="text-button" id="how-to-play" type="button">How to play</button>
             <button class="text-button" id="show-cover" type="button">Cover</button>
             <button class="sound-button" id="sound-button" type="button" aria-pressed="false" aria-label="Turn sound on">
@@ -83,6 +87,7 @@
               <span id="sound-label">Sound off</span>
             </button>
           </div>
+          <div class="page-ornament" id="page-ornament" aria-hidden="true"></div>
 
           <div class="completion" id="completion" hidden>
             <p>Page complete.</p>

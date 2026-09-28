@@ -9,7 +9,8 @@ A small browser-based seek-and-find game presented as a tactile illustrated book
 - Each visit selects a challenge containing one to five objects, follows a varied difficulty rhythm, and avoids recently used scenes, challenge types, and target sets.
 - Every known object remains interactive: active targets receive persistent hand-drawn circles and pencil checks, known non-targets wobble and briefly receive a clear graphite X beside them without advancing progress, and empty space gives only a subtle environmental disturbance.
 - Hotspots scale with each scene and support mouse, touch, keyboard, and screen-reader labels.
-- A subtle hint becomes available after 20 seconds without a find.
+- Help arrives gradually without a clock or penalty: a subtle hint appears first, followed later by an optional one-object reveal and, only after a longer pause, a skip-page control.
+- A small randomized pool of watercolor flowers, leaves, petals, and ferns scatters around the cover and occasionally spills beyond a spread; some pages intentionally remain undecorated.
 - An optional physical magnifying glass follows the pointer on desktop, supports keyboard positioning, and appears with a press-and-hold gesture on touch screens. It magnifies the artwork, ambient cues, and persistent found marks together.
 - Desktop uses a restrained two-page spread with layered page edges, a curved gutter, and four intentional illustration-margin treatments; smaller screens collapse to one continuous page.
 - Completed scenes reveal both an accessible text control and a physical corner lift. The old sheet folds from the lower-right edge while a moving shadow uncovers the preloaded next meadow.
@@ -44,11 +45,13 @@ The included GitHub Actions workflow publishes the repository root whenever `mai
 - `js/scene-manager.js`: game state and page flow
 - `js/book-flow.js`: cover, first-run instructions, and in-book navigation
 - `js/magnifier.js`: desktop, keyboard, and touch magnifier behavior
-- `js/hints.js`: delayed hint behavior
+- `js/hints.js`: progressive hint, one-object reveal, and skip-page assistance
+- `js/decorations.js`: restrained randomized botanical placement
 - `js/ambient-events.js`: environmental hints, found feedback, and scene-specific ambient events
 - `js/audio.js`: optional minimal sound
 - `js/storage.js`: local progress persistence
 - `assets/scenes/`: the eight independent scene artworks
+- `assets/decor/`: watercolor botanical sprite sheet
 
 ## Asset note
 
