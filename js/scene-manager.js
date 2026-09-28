@@ -1,16 +1,17 @@
-import { scenes, chooseChallenge } from "./scene-config.js";
+import { scenes, chooseChallenge, challengeFamily } from "./scene-config.js";
 import { loadProgress, saveProgress } from "./storage.js";
-import { playComplete, playFound, playTurn } from "./audio.js";
+import { playComplete, playFound, playMiss, playTurn } from "./audio.js";
 
 const wait = (duration) => new Promise((resolve) => setTimeout(resolve, duration));
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const narrowScreen = window.matchMedia("(max-width: 859px)");
 
 export class SceneManager {
-  constructor(elements, hintController, ambientController) {
+  constructor(elements, hintController, ambientController, magnifier) {
     this.els = elements;
     this.hints = hintController;
     this.ambient = ambientController;
+    this.magnifier = magnifier;
     this.progress = loadProgress();
     this.pageNumber = this.progress.pagesCompleted + 1;
     this.current = null;
@@ -24,7 +25,8 @@ export class SceneManager {
     this.history = {
       scenes: this.progress.lastSceneId ? [this.progress.lastSceneId] : [],
       types: [],
-      targetSets: []
+      targetSets: [],
+      families: []
     };
   }
 
@@ -41,7 +43,14 @@ export class SceneManager {
   }
 
   pickChallenge(scene) {
-    return chooseChallenge(scene, this.history.types.slice(-2), this.history.targetSets.slice(-3));
+    const rhythm = ["easy", "medium", "quick", "hard", "easy"];
+    return chooseChallenge(
+      scene,
+      this.history.types.slice(-2),
+      this.history.targetSets.slice(-3),
+      this.history.families.slice(-2),
+      rhythm[(this.pageNumber - 1) % rhythm.length]
+    );
   }
 
   async next() {
@@ -49,6 +58,7 @@ export class SceneManager {
     this.turning = true;
     clearTimeout(this.completionTimer);
     this.hints.hide();
+    this.magnifier.hide();
     this.ambient.stop();
     this.els.cornerTurn.hidden = true;
     this.els.scene.classList.add("is-preparing-turn");
@@ -98,7 +108,7 @@ export class SceneManager {
     this.els.rightPageNumber.textContent = rightPage;
     this.els.leftPageNumber.setAttribute("aria-label", `Page ${leftPage}`);
     this.els.rightPageNumber.setAttribute("aria-label", `Page ${rightPage}`);
-    this.els.sceneNumber.textContent = String(leftPage).padStart(2, "0");
+    this.els.sceneNumber.textContent = `${this.pageNumber}.`;
     this.els.title.textContent = scene.title;
     this.els.instruction.textContent = selectedChallenge.instruction;
     this.els.illustrationPage.dataset.layout = scene.layout || "plate";
@@ -113,6 +123,8 @@ export class SceneManager {
     this.els.image.onload = () => this.els.loading.classList.remove("is-visible");
     this.els.image.src = scene.image;
     this.els.foldImage.src = scene.image;
+    this.magnifier.setImage(scene.image);
+    this.magnifier.resetMarks();
     if (preloaded || this.els.image.complete) this.els.loading.classList.remove("is-visible");
 
     this.recordSelection(scene, selectedChallenge);
@@ -127,9 +139,11 @@ export class SceneManager {
     this.history.scenes.push(scene.id);
     this.history.types.push(selectedChallenge.type);
     this.history.targetSets.push(targetKey);
+    this.history.families.push(challengeFamily(selectedChallenge));
     this.history.scenes = this.history.scenes.slice(-3);
     this.history.types = this.history.types.slice(-3);
     this.history.targetSets = this.history.targetSets.slice(-4);
+    this.history.families = this.history.families.slice(-3);
   }
 
   renderHotspots() {
@@ -150,7 +164,12 @@ export class SceneManager {
       button.style.setProperty("--mark-rotate", `${((index % 5) - 2) * 1.5}deg`);
       button.style.setProperty("--mark-stroke", `${1.05 + (index % 3) * 0.22}px`);
       button.style.setProperty("--mark-x", `${2 + (index % 3) * 2}%`);
+      const check = document.createElement("span");
+      check.className = "found-check";
+      check.setAttribute("aria-hidden", "true");
+      button.append(check);
       button.addEventListener("click", () => {
+        if (this.magnifier.shouldSuppressClick()) return;
         if (isTarget) this.find(item, button);
         else this.notTarget(item, button);
       });
@@ -161,6 +180,7 @@ export class SceneManager {
   hint(button) {
     const item = this.activeTargets.find((target) => target.id === button.dataset.id);
     if (item) this.ambient.hint(item);
+    if (item) this.magnifier.nudge(button);
   }
 
   find(item, button) {
@@ -169,10 +189,11 @@ export class SceneManager {
     button.classList.add("is-found");
     button.setAttribute("aria-label", `Found: ${item.label}`);
     button.setAttribute("aria-pressed", "true");
+    this.magnifier.addFound(button);
     this.ambient.found(item);
-    playFound();
+    playFound(item.found || item.hint);
     this.els.announcer.textContent = `${item.label} found. ${this.found.size} of ${this.activeTargets.length}.`;
-    this.updateProgress();
+    setTimeout(() => this.updateProgress(), prefersReducedMotion.matches ? 20 : 430);
     if (this.found.size === this.activeTargets.length) this.complete();
     else this.hints.schedule();
   }
@@ -197,6 +218,8 @@ export class SceneManager {
     button.classList.add("is-reacting");
     setTimeout(() => button.classList.remove("is-reacting"), 520);
     this.ambient.miss(item);
+    playMiss();
+    this.els.announcer.textContent = "Not a target for this page.";
     this.hints.schedule();
   }
 
@@ -217,6 +240,6 @@ export class SceneManager {
       this.els.completion.hidden = false;
       this.els.cornerTurn.hidden = false;
       this.els.announcer.textContent = "Page complete. Turn the page when you are ready.";
-    }, prefersReducedMotion.matches ? 80 : 440);
+    }, prefersReducedMotion.matches ? 80 : 720);
   }
 }

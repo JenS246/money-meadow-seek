@@ -15,8 +15,34 @@ function tone(frequency, duration, volume = 0.025) {
   oscillator.stop(context.currentTime + duration);
 }
 
+function scratch(duration = .12, volume = .012) {
+  if (!enabled) return;
+  context ||= new AudioContext();
+  const buffer = context.createBuffer(1, Math.ceil(context.sampleRate * duration), context.sampleRate);
+  const data = buffer.getChannelData(0);
+  for (let index = 0; index < data.length; index += 1) {
+    const progress = index / data.length;
+    data[index] = (Math.random() * 2 - 1) * Math.sin(progress * Math.PI) * .32;
+  }
+  const source = context.createBufferSource();
+  const filter = context.createBiquadFilter();
+  const gain = context.createGain();
+  filter.type = "bandpass";
+  filter.frequency.value = 1700;
+  filter.Q.value = .65;
+  gain.gain.value = volume;
+  source.buffer = buffer;
+  source.connect(filter).connect(gain).connect(context.destination);
+  source.start();
+}
+
 export function toggleSound() { enabled = !enabled; return enabled; }
-export function playFound() { tone(620, .18); }
+export function playFound(kind = "shine") {
+  const voices = { rustle: 430, flutter: 510, chime: 690, shine: 620, hop: 560, bob: 470 };
+  scratch(.15, .01);
+  setTimeout(() => tone(voices[kind] || 610, .16, .018), 45);
+}
+export function playMiss() { scratch(.1, .009); }
 export function playComplete() { tone(520, .24); setTimeout(() => tone(760, .26), 90); }
 export function playTurn() {
   if (!enabled) return;

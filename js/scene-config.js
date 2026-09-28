@@ -10,7 +10,7 @@ const challenge = (type, instruction, targetIds) => ({ type, instruction, target
 
 export const scenes = [
   {
-    id: "cottage-garden", image: "./assets/scenes/cottage-garden.png", title: "The cottage garden",
+    id: "cottage-garden", image: "./assets/scenes/cottage-garden.png", title: "The Cottage Garden",
     layout: "full",
     mobilePosition: "48% 50%", ambient: { type: "butterfly", x: 62, y: 32 },
     objects: [
@@ -34,7 +34,7 @@ export const scenes = [
     ]
   },
   {
-    id: "rain-meadow", image: "./assets/scenes/rain-meadow.png", title: "After the rain",
+    id: "rain-meadow", image: "./assets/scenes/rain-meadow.png", title: "After the Rain",
     layout: "captioned", caption: "After a passing shower.",
     mobilePosition: "52% 50%", ambient: { type: "raindrop", x: 82, y: 32 },
     objects: [
@@ -57,7 +57,7 @@ export const scenes = [
     ]
   },
   {
-    id: "stone-wall", image: "./assets/scenes/stone-wall.png", title: "The old wall",
+    id: "stone-wall", image: "./assets/scenes/stone-wall.png", title: "The Old Wall",
     layout: "plate",
     mobilePosition: "54% 50%", ambient: { type: "insect", x: 58, y: 38 },
     objects: [
@@ -80,7 +80,7 @@ export const scenes = [
     ]
   },
   {
-    id: "greenhouse", image: "./assets/scenes/greenhouse.png", title: "The glass house",
+    id: "greenhouse", image: "./assets/scenes/greenhouse.png", title: "The Glass House",
     layout: "tall",
     mobilePosition: "48% 50%", ambient: { type: "condensation", x: 54, y: 20 },
     objects: [
@@ -105,7 +105,7 @@ export const scenes = [
     ]
   },
   {
-    id: "woodland-edge", image: "./assets/scenes/woodland-edge.png", title: "Where the woods begin",
+    id: "woodland-edge", image: "./assets/scenes/woodland-edge.png", title: "Where the Woods Begin",
     layout: "full",
     mobilePosition: "49% 50%", ambient: { type: "fern", x: 51, y: 62 },
     objects: [
@@ -128,7 +128,7 @@ export const scenes = [
     ]
   },
   {
-    id: "rose-path", image: "./assets/scenes/rose-path.png", title: "The rose path",
+    id: "rose-path", image: "./assets/scenes/rose-path.png", title: "The Rose Path",
     layout: "captioned", caption: "The path at dusk.",
     mobilePosition: "52% 50%", ambient: { type: "petal", x: 45, y: 26 },
     objects: [
@@ -154,7 +154,7 @@ export const scenes = [
     ]
   },
   {
-    id: "summer-field", image: "./assets/scenes/summer-field.png", title: "Late summer",
+    id: "summer-field", image: "./assets/scenes/summer-field.png", title: "Late Summer",
     layout: "tall",
     mobilePosition: "52% 50%", ambient: { type: "seed", x: 68, y: 38 },
     objects: [
@@ -179,7 +179,7 @@ export const scenes = [
     ]
   },
   {
-    id: "secret-garden", image: "./assets/scenes/secret-garden.png", title: "The impossible garden",
+    id: "secret-garden", image: "./assets/scenes/secret-garden.png", title: "The Impossible Garden",
     layout: "plate",
     mobilePosition: "51% 50%", ambient: { type: "impossible", x: 53, y: 41 },
     objects: [
@@ -204,13 +204,32 @@ export const scenes = [
   }
 ];
 
-export function chooseChallenge(scene, recentTypes = [], recentTargetSets = []) {
-  const recentType = recentTypes.at(-1);
-  const available = scene.challenges.filter((item) => {
+const familyFor = (type) => {
+  if (["money", "metal", "round", "paper", "pocket", "number", "red", "lost", "impossible"].includes(type)) return "category";
+  if (["motion"].includes(type)) return "motion";
+  return "logic";
+};
+
+const bandFor = (challengeItem) => {
+  const count = challengeItem.targetIds.length;
+  if (count === 1) return "quick";
+  if (count === 2) return "easy";
+  if (count === 3) return "medium";
+  return "hard";
+};
+
+export function challengeFamily(challengeItem) { return familyFor(challengeItem.type); }
+
+export function chooseChallenge(scene, recentTypes = [], recentTargetSets = [], recentFamilies = [], preferredBand = "medium") {
+  const scored = scene.challenges.map((item) => {
     const key = [...item.targetIds].sort().join("|");
-    return item.type !== recentType && !recentTargetSets.includes(key);
+    let score = Math.random();
+    if (bandFor(item) === preferredBand) score += 4;
+    if (!recentTypes.includes(item.type)) score += 2;
+    if (!recentTargetSets.includes(key)) score += 2;
+    if (!recentFamilies.includes(familyFor(item.type))) score += 1.5;
+    return { item, score };
   });
-  const pool = available.length ? available : scene.challenges.filter((item) => item.type !== recentType);
-  const fallback = pool.length ? pool : scene.challenges;
-  return fallback[Math.floor(Math.random() * fallback.length)];
+  scored.sort((a, b) => b.score - a.score);
+  return scored[0].item;
 }

@@ -43,6 +43,12 @@ export function createAmbientController(container) {
     },
     miss(item) {
       cue(container, item.hint || "rustle", item.x, item.y, "miss");
+      const mark = document.createElement("span");
+      mark.className = "pencil-x";
+      mark.style.left = `${item.x}%`;
+      mark.style.top = `${item.y}%`;
+      container.append(mark);
+      setTimeout(() => mark.remove(), 780);
     },
     empty(x, y) {
       cue(container, "empty", x, y, "empty");

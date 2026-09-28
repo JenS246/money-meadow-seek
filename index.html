@@ -10,7 +10,52 @@
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <main class="book" id="page" aria-labelledby="game-title">
+    <section class="cover-view" id="cover-view" aria-labelledby="cover-title" hidden>
+      <div class="closed-book" id="closed-book">
+        <div class="cover-board" aria-hidden="true"></div>
+        <div class="cover-face">
+          <span class="cover-coin" aria-hidden="true">5</span>
+          <span class="cover-sprig cover-sprig--left" aria-hidden="true"></span>
+          <span class="cover-sprig cover-sprig--right" aria-hidden="true"></span>
+          <p class="cover-kicker">An illustrated seek-and-find book</p>
+          <h1 id="cover-title">Money Meadow</h1>
+          <button class="cover-open" id="cover-open" type="button">Open the book</button>
+        </div>
+        <div class="cover-pages" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section class="intro-view" id="intro-view" aria-labelledby="intro-title" hidden>
+      <div class="book intro-book" id="intro-book">
+        <section class="book-page book-page--left intro-page intro-page--left">
+          <div class="intro-copy">
+            <p class="running-title">Money Meadow</p>
+            <h2 id="intro-title">How to play</h2>
+            <p>Look closely.</p>
+            <p>Each page asks you to find something in the picture.</p>
+            <p>Tap what you find.</p>
+            <dl class="mark-key">
+              <div><dt><span class="sample-circle"><span></span></span></dt><dd>Circle the right things.</dd></div>
+              <div><dt><span class="sample-x" aria-hidden="true"></span></dt><dd>A pencil mark fades when an object is not the answer.</dd></div>
+              <div><dt><span class="sample-lens" aria-hidden="true"></span></dt><dd>Use the magnifying glass for a closer look.</dd></div>
+            </dl>
+          </div>
+          <button class="intro-cover-link" id="intro-cover" type="button">Cover</button>
+        </section>
+        <section class="book-page book-page--right intro-page intro-page--right">
+          <div class="intro-plate" aria-hidden="true">
+            <img src="./assets/scenes/cottage-garden.png" alt="" draggable="false" />
+            <span class="intro-found-mark"></span>
+            <span class="intro-wrong-mark"></span>
+            <span class="intro-lens"><span></span></span>
+          </div>
+          <p class="intro-turn-note">When the page is complete, turn it.</p>
+          <button class="intro-begin" id="intro-begin" type="button">Begin</button>
+        </section>
+      </div>
+    </section>
+
+    <main class="book game-book" id="page" aria-labelledby="game-title" hidden>
       <section class="book-page book-page--left">
         <div class="book-page__content">
           <header class="book-heading">
@@ -31,6 +76,8 @@
 
           <div class="book-actions">
             <button class="text-button" id="hint-button" type="button" hidden>Hint</button>
+            <button class="text-button" id="how-to-play" type="button">How to play</button>
+            <button class="text-button" id="show-cover" type="button">Cover</button>
             <button class="sound-button" id="sound-button" type="button" aria-pressed="false" aria-label="Turn sound on">
               <span class="sound-button__mark" aria-hidden="true">♪</span>
               <span id="sound-label">Sound off</span>
@@ -58,11 +105,26 @@
           </span>
           <div class="ambient" id="ambient" aria-hidden="true"></div>
           <div class="hotspots" id="hotspots"></div>
+          <div class="magnifier-lens" id="magnifier-lens" aria-hidden="true" hidden>
+            <div class="magnifier-offset" id="magnifier-offset">
+              <div class="magnifier-world" id="magnifier-world">
+                <img id="magnifier-image" alt="" draggable="false" />
+                <div class="magnifier-marks" id="magnifier-marks"></div>
+                <div class="magnifier-ambient" id="magnifier-ambient"></div>
+              </div>
+            </div>
+            <span class="magnifier-glass"></span>
+            <span class="magnifier-handle"></span>
+          </div>
           <button class="corner-turn" id="corner-turn" type="button" aria-label="Turn page" hidden>
             <span aria-hidden="true"></span>
           </button>
           <div class="scene__loading" id="scene-loading" role="status">Opening the next page...</div>
         </div>
+        <button class="magnifier-tool" id="magnifier-tool" type="button" aria-label="Use magnifying glass" aria-pressed="false">
+          <span class="magnifier-tool__lens" aria-hidden="true"></span>
+          <span class="magnifier-tool__handle" aria-hidden="true"></span>
+        </button>
         <p class="scene-caption" id="scene-caption" hidden></p>
         <p class="page-number page-number--right" id="right-page-number" aria-label="Right page 2">2</p>
       </section>
