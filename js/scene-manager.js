@@ -23,7 +23,6 @@ export class SceneManager {
     this.turning = false;
     this.pageComplete = false;
     this.completionTimer = null;
-    this.feedbackTimer = null;
     this.history = {
       scenes: this.progress.lastSceneId ? [this.progress.lastSceneId] : [],
       types: [],
@@ -59,7 +58,6 @@ export class SceneManager {
     if (this.turning || (!force && (!this.pageComplete || this.els.completion.hidden))) return;
     this.turning = true;
     clearTimeout(this.completionTimer);
-    clearTimeout(this.feedbackTimer);
     this.hints.hide();
     this.magnifier.hide();
     this.ambient.stop();
@@ -118,8 +116,6 @@ export class SceneManager {
     this.els.caption.textContent = scene.caption || "";
     this.els.caption.hidden = !scene.caption;
     this.els.completion.hidden = true;
-    this.els.answerFeedback.textContent = "";
-    this.els.answerFeedback.classList.remove("is-visible");
     this.els.cornerTurn.hidden = true;
     this.els.scene.classList.remove("is-complete");
     this.els.announcer.textContent = "";
@@ -201,9 +197,6 @@ export class SceneManager {
 
   find(item, button) {
     if (this.turning || this.found.has(item.id)) return;
-    clearTimeout(this.feedbackTimer);
-    this.els.answerFeedback.textContent = "";
-    this.els.answerFeedback.classList.remove("is-visible");
     this.found.add(item.id);
     this.ambient.clearHint(item.id);
     button.classList.add("is-found");
@@ -239,15 +232,6 @@ export class SceneManager {
     setTimeout(() => button.classList.remove("is-reacting"), 520);
     this.ambient.miss(item);
     playMiss();
-    clearTimeout(this.feedbackTimer);
-    this.els.answerFeedback.textContent = "Not this one.";
-    this.els.answerFeedback.classList.remove("is-visible");
-    void this.els.answerFeedback.offsetWidth;
-    this.els.answerFeedback.classList.add("is-visible");
-    this.feedbackTimer = setTimeout(() => {
-      this.els.answerFeedback.textContent = "";
-      this.els.answerFeedback.classList.remove("is-visible");
-    }, 1900);
     this.els.announcer.textContent = "Not a target for this page.";
   }
 

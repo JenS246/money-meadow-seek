@@ -20,7 +20,15 @@ const coverLayouts = [
     { variant: "leaves", x: 101, y: 58, size: 112, rotation: -30 },
     { variant: "daisy", x: 95, y: 30, size: 57, rotation: 12 },
     { variant: "petal", x: 102, y: 18, size: 38, rotation: -15 },
-    { variant: "violet", x: 83, y: 3, size: 52, rotation: 22 }
+    { variant: "violet", x: 83, y: 3, size: 52, rotation: 22 },
+    { variant: "petal", x: 3, y: 20, size: 46, rotation: 14 },
+    { variant: "violet", x: 14, y: 33, size: 62, rotation: -26 },
+    { variant: "daisy", x: 4, y: 68, size: 74, rotation: 31 },
+    { variant: "leaves", x: 18, y: 85, size: 86, rotation: -17 },
+    { variant: "rose", x: 28, y: 7, size: 78, rotation: 26 },
+    { variant: "petal", x: 53, y: 96, size: 51, rotation: -24 },
+    { variant: "violet", x: 92, y: 67, size: 59, rotation: 19 },
+    { variant: "fern", x: 88, y: 88, size: 108, rotation: -29 }
   ],
   [
     { variant: "petal", x: 2, y: 15, size: 42, rotation: 28 },
@@ -41,7 +49,15 @@ const coverLayouts = [
     { variant: "rose", x: 90, y: 8, size: 92, rotation: 20 },
     { variant: "leaves", x: 76, y: 1, size: 80, rotation: -25 },
     { variant: "daisy", x: 63, y: 4, size: 52, rotation: 14 },
-    { variant: "petal", x: 46, y: -1, size: 40, rotation: -32 }
+    { variant: "petal", x: 46, y: -1, size: 40, rotation: -32 },
+    { variant: "daisy", x: 96, y: 23, size: 71, rotation: 27 },
+    { variant: "petal", x: 88, y: 39, size: 45, rotation: -20 },
+    { variant: "violet", x: 102, y: 53, size: 66, rotation: 15 },
+    { variant: "rose", x: 91, y: 67, size: 84, rotation: -25 },
+    { variant: "fern", x: 89, y: 80, size: 118, rotation: 21 },
+    { variant: "daisy", x: 80, y: 90, size: 63, rotation: -17 },
+    { variant: "leaves", x: 33, y: 96, size: 79, rotation: 25 },
+    { variant: "petal", x: 7, y: 82, size: 48, rotation: -29 }
   ],
   [
     { variant: "rose", x: 1, y: 10, size: 73, rotation: -22 },
@@ -62,7 +78,15 @@ const coverLayouts = [
     { variant: "violet", x: 17, y: 94, size: 57, rotation: 29 },
     { variant: "petal", x: 7, y: 84, size: 45, rotation: -13 },
     { variant: "daisy", x: -1, y: 72, size: 66, rotation: 20 },
-    { variant: "leaves", x: 5, y: 57, size: 88, rotation: -28 }
+    { variant: "leaves", x: 5, y: 57, size: 88, rotation: -28 },
+    { variant: "violet", x: 16, y: 4, size: 61, rotation: -23 },
+    { variant: "petal", x: 88, y: 7, size: 45, rotation: 28 },
+    { variant: "daisy", x: 97, y: 30, size: 68, rotation: -18 },
+    { variant: "rose", x: 90, y: 76, size: 88, rotation: 21 },
+    { variant: "petal", x: 72, y: 91, size: 43, rotation: -26 },
+    { variant: "violet", x: 52, y: 94, size: 62, rotation: 17 },
+    { variant: "daisy", x: 32, y: 93, size: 72, rotation: -21 },
+    { variant: "rose", x: 8, y: 69, size: 82, rotation: 26 }
   ]
 ];
 
@@ -83,38 +107,52 @@ const pageCompositions = [
   [
     { kind: "botanical", variant: "petal", x: 75, y: 69, size: 56, rotation: -16 },
     { kind: "botanical", variant: "daisy", x: 17, y: 82, size: 48, rotation: 11 },
-    { kind: "imprint", variant: "stamp", x: 88, y: 43, size: 46, rotation: 7, opacity: .2 }
+    { kind: "botanical", variant: "leaves", x: 94, y: 71, size: 68, rotation: -21 },
+    { kind: "imprint", variant: "stamp", x: 88, y: 43, size: 46, rotation: 7, opacity: .22 },
+    { kind: "imprint", variant: "pencil", x: 14, y: 53, size: 62, rotation: -6, opacity: .2 }
   ],
   [
     { kind: "botanical", variant: "fern", x: 86, y: 73, size: 82, rotation: 18 },
     { kind: "botanical", variant: "petal", x: 61, y: 85, size: 42, rotation: -29 },
     { kind: "imprint", variant: "coin", x: 18, y: 71, size: 52, rotation: -9, opacity: .18 },
-    { kind: "imprint", variant: "pressure", x: 56, y: 88, size: 72, rotation: 3, opacity: .15 }
+    { kind: "botanical", variant: "daisy", x: 9, y: 45, size: 43, rotation: -13 },
+    { kind: "imprint", variant: "pressure", x: 56, y: 88, size: 72, rotation: 3, opacity: .17 },
+    { kind: "imprint", variant: "pencil", x: 91, y: 33, size: 55, rotation: 8, opacity: .18 }
   ],
   [
     { kind: "botanical", variant: "rose", x: 21, y: 82, size: 62, rotation: -17 },
     { kind: "botanical", variant: "petal", x: 69, y: 76, size: 39, rotation: 26 },
-    { kind: "imprint", variant: "vine", x: 92, y: 58, size: 84, rotation: -7, opacity: .19 }
+    { kind: "botanical", variant: "fern", x: 6, y: 49, size: 76, rotation: 24 },
+    { kind: "imprint", variant: "vine", x: 92, y: 58, size: 84, rotation: -7, opacity: .21 },
+    { kind: "imprint", variant: "corner", x: 82, y: 36, size: 58, rotation: 3, opacity: .18 }
   ],
   [
     { kind: "botanical", variant: "violet", x: 19, y: 76, size: 58, rotation: -24 },
     { kind: "botanical", variant: "petal", x: 67, y: 87, size: 40, rotation: 20 },
-    { kind: "imprint", variant: "coin", x: 82, y: 84, size: 45, rotation: 11, opacity: .16 }
+    { kind: "botanical", variant: "leaves", x: 95, y: 48, size: 65, rotation: -20 },
+    { kind: "imprint", variant: "coin", x: 82, y: 84, size: 45, rotation: 11, opacity: .19 },
+    { kind: "imprint", variant: "pencil", x: 12, y: 58, size: 61, rotation: -9, opacity: .2 }
   ],
   [
     { kind: "botanical", variant: "leaves", x: 82, y: 71, size: 74, rotation: -17 },
     { kind: "botanical", variant: "petal", x: 25, y: 86, size: 38, rotation: 31 },
-    { kind: "imprint", variant: "stamp", x: 15, y: 48, size: 42, rotation: -5, opacity: .17 }
+    { kind: "botanical", variant: "rose", x: 95, y: 87, size: 54, rotation: 19 },
+    { kind: "imprint", variant: "stamp", x: 15, y: 48, size: 42, rotation: -5, opacity: .2 },
+    { kind: "imprint", variant: "pencil", x: 62, y: 57, size: 58, rotation: 5, opacity: .16 }
   ],
   [
     { kind: "botanical", variant: "violet", x: 30, y: 82, size: 55, rotation: -12 },
     { kind: "imprint", variant: "pressure", x: 76, y: 80, size: 88, rotation: -4, opacity: .17 },
-    { kind: "imprint", variant: "vine", x: 10, y: 67, size: 69, rotation: 12, opacity: .16 }
+    { kind: "botanical", variant: "daisy", x: 92, y: 47, size: 44, rotation: 16 },
+    { kind: "imprint", variant: "vine", x: 10, y: 67, size: 69, rotation: 12, opacity: .19 },
+    { kind: "imprint", variant: "pencil", x: 59, y: 37, size: 60, rotation: -4, opacity: .17 }
   ],
   [
     { kind: "botanical", variant: "daisy", x: 88, y: 77, size: 55, rotation: 15 },
     { kind: "botanical", variant: "leaves", x: 18, y: 84, size: 68, rotation: -21 },
-    { kind: "imprint", variant: "pressure", x: 57, y: 86, size: 69, rotation: 4, opacity: .14 }
+    { kind: "botanical", variant: "petal", x: 7, y: 58, size: 41, rotation: 27 },
+    { kind: "imprint", variant: "pressure", x: 57, y: 86, size: 69, rotation: 4, opacity: .17 },
+    { kind: "imprint", variant: "corner", x: 88, y: 39, size: 56, rotation: -5, opacity: .18 }
   ]
 ];
 
@@ -127,14 +165,18 @@ function seededRandom(seedText) {
   };
 }
 
-function makeBotanical(variant, slot, random) {
+function makeBotanical(variant, slot, random, options = {}) {
+  const minOpacity = options.minOpacity ?? .68;
+  const opacityVariance = options.opacityVariance ?? .25;
+  const minScale = options.minScale ?? .82;
+  const scaleVariance = options.scaleVariance ?? .34;
   const element = document.createElement("span");
   element.className = `botanical botanical--${variant}`;
   element.style.setProperty("--botanical-x", `${slot.x + (random() - .5) * 4}%`);
   element.style.setProperty("--botanical-y", `${slot.y + (random() - .5) * 4}%`);
-  element.style.setProperty("--botanical-size", `${slot.size * (.82 + random() * .34)}px`);
+  element.style.setProperty("--botanical-size", `${slot.size * (minScale + random() * scaleVariance)}px`);
   element.style.setProperty("--botanical-rotation", `${slot.rotation + (random() - .5) * 22}deg`);
-  element.style.setProperty("--botanical-opacity", `${.68 + random() * .25}`);
+  element.style.setProperty("--botanical-opacity", `${minOpacity + random() * opacityVariance}`);
   return element;
 }
 
@@ -149,18 +191,23 @@ function makeImprint(detail, random) {
   return element;
 }
 
-function render(container, slots, count, seedText) {
+function render(container, slots, count, seedText, options) {
   const random = seededRandom(seedText);
   const shuffledSlots = [...slots].sort(() => random() - .5);
   const shuffledVariants = [...variants].sort(() => random() - .5);
   container.replaceChildren(...shuffledSlots.slice(0, count).map((slot, index) => (
-    makeBotanical(slot.variant ?? shuffledVariants[index % shuffledVariants.length], slot, random)
+    makeBotanical(slot.variant ?? shuffledVariants[index % shuffledVariants.length], slot, random, options)
   )));
 }
 
 export function createDecorationController({ cover, spread, ornament }) {
   const coverLayout = coverLayouts[Math.floor(Math.random() * coverLayouts.length)];
-  render(cover, coverLayout, coverLayout.length, `cover-${Date.now()}`);
+  render(cover, coverLayout, coverLayout.length, `cover-${Date.now()}`, {
+    minOpacity: .82,
+    opacityVariance: .18,
+    minScale: .9,
+    scaleVariance: .28
+  });
 
   return {
     showSpread(pageNumber, sceneId) {
